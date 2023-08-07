@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="text"]:focus ~ label > img {
+    @apply scale-0 opacity-0 hidden
+}
+
+input[type="text"]:focus ~ label {
+    @apply text-mainBlue scale-75 translate-x-1.5 -translate-y-4 bg-white px-1.5 leading-normal rounded
+}
