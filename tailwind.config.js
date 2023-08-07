@@ -8,9 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        inputColor: "#F1F8FA",
-        buttonColor: "#0AACDD",
+        loginInputColor: "#F1F8FA",
         buttonHoverColor: "#0AACDD90",
+        buttonBlueColor: "#0AACDD",
+        buttonOrangeColor: "#DD614A",
         mainBlue: "#043593",
       },
     },

@@ -19,7 +19,7 @@ export default function UserLoginpage() {
         </p>
         <div className="mt-[74px] relative">
           <input
-            className="w-80 h-12 px-4 py-2 rounded-[10px] bg-inputColor focus:outline-mainBlue"
+            className="w-80 h-12 px-4 py-2 rounded-[10px] bg-loginInputColor focus:outline-mainBlue"
             type="text"
             id="member-number"
             name="member-number"
@@ -41,7 +41,7 @@ export default function UserLoginpage() {
 
         <div className="mt-[29px] relative">
           <input
-            className="w-80 h-12 px-4 py-2 rounded-[10px] bg-inputColor focus:outline-mainBlue"
+            className="w-80 h-12 px-4 py-2 rounded-[10px] bg-loginInputColor focus:outline-mainBlue"
             type="text"
             id="member-password"
             name="member-password"
@@ -61,7 +61,7 @@ export default function UserLoginpage() {
           </label>
         </div>
         <button
-          className="w-80 h-12 mt-[71px] rounded-[10px] border-2 border-transparent bg-buttonColor font-bold text-white transition duration-[.3s] ease hover:bg-white hover:text-buttonColor hover:border-buttonColor"
+          className="w-80 h-12 mt-[71px] rounded-[10px] border-2 border-transparent bg-buttonBlueColor font-bold text-white transition duration-[.3s] ease hover:bg-white hover:text-buttonBlueColor hover:border-buttonBlueColor"
           type="submit"
           title="submit Button"
         >
