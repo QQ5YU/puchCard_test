@@ -6,7 +6,7 @@ export default function UserLocationPage() {
   return (
     <div className="mx-auto px-[11.23%]">
       {/* title  */}
-      <h1 className="text-mainBlue font-bold text-2xl mt-[97px] w-full">
+      <h1 className="hidden md:block text-mainBlue font-bold text-2xl mt-[97px] w-full">
         GPS 定位打卡
       </h1>
       {/* location img  */}
@@ -49,13 +49,13 @@ export default function UserLocationPage() {
       <div className="mt-24 mb-[81px]">
         <Link
           href="/user/recordSearch"
-          className="bg-buttonBlueColor rounded-lg text-white font-bold py-5 px-2 w-[182px] inline-block text-center"
+          className="bg-buttonBlueColor rounded-lg text-white font-bold py-5 px-2 w-[163px] sm:w-[182px] inline-block text-center"
         >
           打卡紀錄查詢/修改
         </Link>
         <button
           type="submit"
-          className="bg-buttonOrangeColor rounded-lg text-white font-bold py-5 px-2 w-[182px] ml-5 text-center "
+          className="bg-buttonOrangeColor rounded-lg text-white font-bold py-5 px-2 w-[163px] sm:w-[182px] ml-5 text-center "
         >
           開始打卡
         </button>
