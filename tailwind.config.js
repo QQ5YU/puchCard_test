@@ -13,6 +13,7 @@ module.exports = {
         buttonBlueColor: "#0AACDD",
         buttonOrangeColor: "#DD614A",
         mainBlue: "#043593",
+        darkBlue: "#1B2751",
       },
     },
   },

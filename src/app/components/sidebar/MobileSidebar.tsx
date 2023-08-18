@@ -17,12 +17,12 @@ export default function MobileSidebar() {
         />
         {routes.map((link) =>
           link.active ? (
-            <h1
+            <p
               className=" ml-2 text-3xl text-mainBlue font-bold"
               key={link.label}
             >
               {link.label}
-            </h1>
+            </p>
           ) : (
             ""
           )

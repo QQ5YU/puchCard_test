@@ -1,14 +1,17 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import "./gpsLocation.css";
+import Button from "../components/Button";
+import LinkButton from "../components/LinkButton";
+import Title from "../components/Title";
 
 export default function UserLocationPage() {
+  const [ischeckIn, setIscheckIn] = useState<boolean>(false);
   return (
-    <div className="mx-auto px-[11.23%]">
+    <div className="flex justify-center items-center flex-col w-[38.08%] min-w-[360px] max-w-[390px] mx-auto">
       {/* title  */}
-      <h1 className="hidden md:block text-mainBlue font-bold text-2xl mt-[97px] w-full">
-        GPS 定位打卡
-      </h1>
+      <Title text="GPS 定位打卡" />
       {/* location img  */}
       <div className="bg-[#ECECEC] rounded-lg w-[390px] h-[48.94px] mt-8 p-4 flex items-center justify-between ">
         <label className="text-sm text-[#8B8B8B] inline-block">
@@ -17,7 +20,7 @@ export default function UserLocationPage() {
         <button
           type="button"
           title="locationBtn"
-          className="bg-[#F03C5C] rounded-full w-[29px] h-[29px] flex justify-center items-center"
+          className="bg-[#F03C5C] rounded-full w-[29px] h-[29px] flex justify-center items-center hover:opacity-70 transition-opacity"
         >
           <Image
             src="../images/gpsLocation/NavigationArrow.svg"
@@ -29,11 +32,21 @@ export default function UserLocationPage() {
       </div>
       {/*  description */}
       <div className="flex flex-col items-center justify-center mt-24">
-        <Image
+        {/* <Image
           src="../images/gpsLocation/location.svg"
           width={72}
           height={72}
           alt="location"
+        ></Image> */}
+        <Image
+          src={
+            ischeckIn
+              ? "../images/gpsLocation/success.svg"
+              : "../images/gpsLocation/location.svg"
+          }
+          width={ischeckIn ? 383 : 72}
+          height={ischeckIn ? 242 : 72}
+          alt={ischeckIn ? "success image" : "location image"}
         ></Image>
         <p className="text-mainBlue font-bold text-2xl  mt-6">立即打卡</p>
         <p className="mt-12 w-[390px] text-center text-base text-[#564A4A] font-bold">
@@ -47,18 +60,12 @@ export default function UserLocationPage() {
       </div>
       {/* buttons  */}
       <div className="mt-24 mb-[81px]">
-        <Link
-          href="/user/recordSearch"
-          className="bg-buttonBlueColor rounded-lg text-white font-bold py-5 px-2 w-[163px] sm:w-[182px] inline-block text-center"
-        >
-          打卡紀錄查詢/修改
-        </Link>
-        <button
-          type="submit"
-          className="bg-buttonOrangeColor rounded-lg text-white font-bold py-5 px-2 w-[163px] sm:w-[182px] ml-5 text-center "
-        >
-          開始打卡
-        </button>
+        <LinkButton
+          href="/recordSearch"
+          color="bg-buttonBlueColor"
+          text="打卡紀錄查詢/修改"
+        />
+        <Button type="submit" color="bg-buttonOrangeColor" text="開始打卡" />
       </div>
     </div>
   );

@@ -21,8 +21,8 @@ export default function DesktopSidebar() {
             href={link.href}
             className={
               link.active
-                ? "text-mainBlue font-bold text-xl block ml-12 mt-2"
-                : "text-xl block ml-12 mt-2"
+                ? "text-mainBlue font-bold text-xl block ml-12 my-5"
+                : "text-xl block ml-12 my-5 hover:opacity-70 transition-opacity"
             }
           >
             {link.label}
