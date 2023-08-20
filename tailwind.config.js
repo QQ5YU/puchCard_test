@@ -15,6 +15,11 @@ module.exports = {
         mainBlue: "#043593",
         darkBlue: "#1B2751",
       },
+      boxShadow: {
+        input:
+          " 0 10px 15px -3px rgb(4 53 147 / 0.2), 0 4px 6px -4px rgb(4 53 147 / 0.2)",
+        record: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+      },
     },
   },
   plugins: [],
