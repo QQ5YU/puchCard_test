@@ -12,8 +12,8 @@ const useRoutes = () => {
       },
       {
         label: "打卡紀錄修改/查詢",
-        href: "/recordSearch",
-        active: pathname === "/recordSearch",
+        href: "/recordsSearch",
+        active: pathname.startsWith("/recordsSearch"),
       },
     ],
     [pathname]

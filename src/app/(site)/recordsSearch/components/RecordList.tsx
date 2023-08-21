@@ -1,5 +1,5 @@
 import { data } from "../data/data";
-import Button from "./Button";
+import LinkComponent from "./LinkComponent";
 export default async function recordList() {
   return (
     <>
@@ -18,10 +18,14 @@ export default async function recordList() {
                 <span>{record.location}</span>
               </div>
             </div>
-            <div className="flex flex-col items-start">
-              <Button type="submit" bgColor="buttonOrangeColor" text="修改" />
-              <Button
-                type="submit"
+            <div className="flex flex-col justify-around">
+              <LinkComponent
+                href={`/recordsSearch/modify/${record.id}`}
+                bgColor="buttonOrangeColor"
+                text="修改"
+              />
+              <LinkComponent
+                href={`/recordsSearch/viewHistory/${record.id}`}
                 bgColor="buttonBlueColor"
                 text="查看"
                 margin="mt-2"

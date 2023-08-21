@@ -2,6 +2,8 @@ import Image from "next/image";
 import { FC } from "react";
 
 interface InputProps {
+  onClick?: () => void;
+  onMouseLeave?: () => void;
   inputType: "text" | "datetime-local";
   id: string;
   name: string;
@@ -12,6 +14,7 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({
+  onClick,
   inputType,
   id,
   name,
@@ -21,7 +24,7 @@ const Input: FC<InputProps> = ({
   alt,
 }) => {
   return (
-    <div className="relative mt-6 ml-1">
+    <div className="relative mt-6 ml-1 cursor-pointer" onClick={onClick}>
       <input
         className="border-transparent rounded-[10px] bg-[#EAEAEA] w-[38%] min-w-[390px] max-w-[420px] h-12 px-7 outline-none transition-shadow ease-linear focus:shadow-input"
         type={inputType}
@@ -29,7 +32,6 @@ const Input: FC<InputProps> = ({
         name={name}
         placeholder={placeholder}
       />
-
       <span className="absolute bg-[#EAEAEA] w-[22px] h-[22px] pointer-events-none top-[14px] right-7">
         <button
           type={buttonType}

@@ -10,8 +10,8 @@ module.exports = {
       colors: {
         loginInputColor: "#F1F8FA",
         buttonHoverColor: "#0AACDD90",
-        buttonBlueColor: "#0AACDD",
         buttonOrangeColor: "#DD614A",
+        buttonBlueColor: "#0AACDD",
         mainBlue: "#043593",
         darkBlue: "#1B2751",
       },

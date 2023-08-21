@@ -6,7 +6,6 @@ export default function MobileSidebar() {
   const routes = useRoutes();
   return (
     <>
-      {" "}
       <header className="md:hidden flex justify-center items-center mt-[55px] mb-[49px]">
         <Image
           src="../images/logo.svg"

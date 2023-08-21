@@ -38,8 +38,8 @@ export default function RootLayout({
           <MobileSidebar />
           <DesktopSidebar />
           {children}
-          {isSmWidth && <Footer />}
         </div>
+        {isSmWidth && <Footer />}
       </body>
     </html>
   );
