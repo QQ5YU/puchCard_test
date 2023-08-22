@@ -4,7 +4,9 @@ import { FC } from "react";
 interface InputProps {
   onClick?: () => void;
   onMouseLeave?: () => void;
-  inputType: "text" | "datetime-local";
+  inputClassName?: string;
+  readOnly?: boolean;
+  inputType: "text";
   id: string;
   name: string;
   placeholder: string;
@@ -19,18 +21,26 @@ const Input: FC<InputProps> = ({
   id,
   name,
   placeholder,
+  readOnly,
+  inputClassName,
   buttonType,
   imgSrc,
   alt,
 }) => {
+  const inputProps = {
+    readOnly: readOnly ? true : undefined,
+  };
+
   return (
-    <div className="relative mt-6 ml-1 cursor-pointer" onClick={onClick}>
+    <div className="relative mt-6 ml-1">
       <input
-        className="border-transparent rounded-[10px] bg-[#EAEAEA] w-[38%] min-w-[390px] max-w-[420px] h-12 px-7 outline-none transition-shadow ease-linear focus:shadow-input"
+        className={`border-transparent rounded-[10px] bg-[#EAEAEA] w-[38%] min-w-[390px] max-w-[420px] h-12 px-7 outline-none  ${inputClassName}`}
         type={inputType}
         id={id}
+        onClick={onClick}
         name={name}
         placeholder={placeholder}
+        {...inputProps}
       />
       <span className="absolute bg-[#EAEAEA] w-[22px] h-[22px] pointer-events-none top-[14px] right-7">
         <button

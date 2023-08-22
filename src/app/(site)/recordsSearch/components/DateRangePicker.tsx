@@ -54,8 +54,10 @@ export default function DateRangePicker() {
         name="selected_dateRange"
         placeholder={displayDateRange(dateRange)!}
         buttonType="submit"
-        imgSrc="../../images/recordSearch/arrow.svg"
+        imgSrc="../../images/recordsSearch/arrow.svg"
         alt="arrow icon"
+        readOnly
+        inputClassName="cursor-pointer transition-shadow ease-linear focus:shadow-input"
       />
       {inputClick && (
         <div
