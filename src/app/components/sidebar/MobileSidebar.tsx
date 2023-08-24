@@ -5,7 +5,7 @@ import Footer from "./Footer";
 export default function MobileSidebar() {
   const routes = useRoutes();
   return (
-    <header className="md:hidden flex justify-center items-center mt-[55px] mb-[49px]">
+    <header className="md:hidden flex justify-center items-center mt-[55px] mb-[38px]">
       <Image
         src="/images/logo.svg"
         width={32}

@@ -1,17 +1,21 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import "./gpsLocation.css";
+import "../style/style.css";
 import Button from "../components/Button";
 import LinkButton from "../components/LinkButton";
 import Title from "../components/Title";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Line@ 打卡系統 GPS定位",
+};
 export default function UserLocationPage() {
   const [ischeckIn, setIscheckIn] = useState<boolean>(false);
   return (
     <div className="flex justify-center items-center flex-col w-[38.08%] min-w-[360px] max-w-[390px] mx-auto">
       {/* title  */}
-      <Title text="GPS 定位打卡" />
+      <Title text="GPS 定位打卡" margin="mt-[97px]" />
       {/* location img  */}
       <div className="bg-[#ECECEC] rounded-lg w-[390px] h-[48.94px] mt-8 p-4 flex items-center justify-between ">
         <label className="text-sm text-[#8B8B8B] inline-block">
@@ -61,7 +65,7 @@ export default function UserLocationPage() {
       {/* buttons  */}
       <div className="mt-24 mb-[81px]">
         <LinkButton
-          href="/recordSearch"
+          href="/recordsSearch"
           color="bg-buttonBlueColor"
           text="打卡紀錄查詢/修改"
         />

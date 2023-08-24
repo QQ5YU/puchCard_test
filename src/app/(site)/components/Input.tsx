@@ -6,6 +6,7 @@ interface InputProps {
   onMouseLeave?: () => void;
   inputClassName?: string;
   readOnly?: boolean;
+  margin?: string;
   inputType: "text";
   id: string;
   name: string;
@@ -16,6 +17,7 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({
+  margin,
   onClick,
   inputType,
   id,
@@ -32,7 +34,7 @@ const Input: FC<InputProps> = ({
   };
 
   return (
-    <div className="relative mt-6 ml-1">
+    <div className={`relative ${margin} ml-1`}>
       <input
         className={`border-transparent rounded-[10px] bg-[#EAEAEA] w-[38%] min-w-[390px] max-w-[420px] h-12 px-7 outline-none  ${inputClassName}`}
         type={inputType}

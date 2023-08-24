@@ -1,3 +1,4 @@
+/* text strong style use in gpslocation and fail page  */
 p > span::after {
     content: '';
     position: absolute;
