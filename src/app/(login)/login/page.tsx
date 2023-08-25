@@ -14,13 +14,17 @@ export const metadata: Metadata = {
 export default function Loginpage() {
   return (
     <div className="max-w-screen-lg mx-auto flex items-center justify-center pb-[100px]">
-      <Image
-        src="images/login/login_draw.svg"
-        className="hidden md:block"
-        width={462}
-        height={347}
-        alt="login draw"
-      />
+      <div className="hidden w-[41.6vw] h-[347px] max-w-[462px] md:flex justify-center items-center">
+        <Image
+          src="images/login/login_draw.svg"
+          className="hidden md:block"
+          width={0}
+          height={0}
+          layout="responsive"
+          alt="login draw"
+        />
+      </div>
+
       <Hr />
       <div className="flex flex-col justify-center">
         <Title text="登入" />
