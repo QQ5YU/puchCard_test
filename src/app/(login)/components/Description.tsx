@@ -17,7 +17,7 @@ const Description: FC<DescriptionProps> = ({
 }) => {
   return (
     <p
-      className={`mt-[11px] text-${fontSize} text-${textColor} ${fontWeight} ${lineHeight} text-center `}
+      className={`mt:7 md:mt-[11px] text-${fontSize} text-${textColor} ${fontWeight} ${lineHeight} text-center `}
     >
       {content}
     </p>

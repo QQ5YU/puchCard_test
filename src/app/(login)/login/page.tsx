@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Line@ 打卡系統 登入",
 };
 
-export default function Loginpage() {
+export default function LogInpage() {
   return (
     <div className="max-w-screen-lg mx-auto flex items-center justify-center pb-[100px]">
       <div className="hidden w-[41.6vw] h-[347px] max-w-[462px] md:flex justify-center items-center">

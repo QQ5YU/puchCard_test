@@ -1,6 +1,5 @@
 import useRoutes from "@/app/hooks/useRoutes";
 import Image from "next/image";
-import Footer from "./Footer";
 
 export default function MobileSidebar() {
   const routes = useRoutes();
