@@ -69,7 +69,12 @@ export default function UserLocationPage() {
           color="bg-buttonBlueColor"
           text="打卡紀錄查詢/修改"
         />
-        <Button type="submit" color="bg-buttonOrangeColor" text="開始打卡" />
+        <Button
+          type="submit"
+          color="bg-buttonOrangeColor"
+          text="開始打卡"
+          margin="ml-[26px]"
+        />
       </div>
     </div>
   );

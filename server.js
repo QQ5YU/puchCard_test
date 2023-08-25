@@ -22,6 +22,6 @@ app.prepare().then(() => {
     }
   }).listen(3001, (e) => {
     if (e) throw e;
-    console.log("Ready on port 3001");
+    console.log(`> Ready on http://localhost:${port}`);
   });
 });

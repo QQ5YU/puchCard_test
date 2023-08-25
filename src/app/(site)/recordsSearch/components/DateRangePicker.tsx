@@ -62,7 +62,7 @@ export default function DateRangePicker() {
       {inputClick && (
         <div
           onMouseLeave={handleDivMouseLeave}
-          className="absolute top-[212px] md:top-[233px] z-10"
+          className="absolute top-[121px] md:top-[207px] z-10"
         >
           <DateRange
             className="shadow-lg "

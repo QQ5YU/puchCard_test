@@ -19,18 +19,18 @@ export default function viewHistoryRecordPage({ params }: any) {
           width="w-1/2"
           margin="mb-2"
           label="姓名"
-          data={recordData[params.record].name}
+          data={recordData[params.record - 1].name}
         />
         <Span
           width="w-1/2"
           margin="mb-2"
           label="員工編號"
-          data={recordData[params.record].number}
+          data={recordData[params.record - 1].number}
         />
         <Span
           width="w-full"
           label="部門"
-          data={recordData[params.record].department}
+          data={recordData[params.record - 1].department}
         />
       </div>
       <div className="bg-[#DCE6F1] rounded-[20px] min-w-[392px] w-[38.28%] max-w-[420px] min-h-[109px] mt-[21px] py-7 px-[30px]">
@@ -38,31 +38,31 @@ export default function viewHistoryRecordPage({ params }: any) {
           width="w-full"
           margin="mb-5"
           label="日期"
-          data={recordData[params.record].name}
+          data={recordData[params.record - 1].date}
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="地點"
-          data={recordData[params.record].location}
+          data={recordData[params.record - 1].location}
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="打卡類型"
-          data={recordData[params.record].type}
+          data={recordData[params.record - 1].type}
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="照片"
-          data={recordData[params.record].photo}
+          data={recordData[params.record - 1].photo}
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="備註"
-          data={recordData[params.record].message}
+          data={recordData[params.record - 1].message}
         />
       </div>
       <LinkButton

@@ -13,10 +13,11 @@ export const metadata: Metadata = {
 
 export default function Loginpage() {
   return (
-    <div className="max-w-screen-lg mx-auto flex items-center justify-center">
+    <div className="max-w-screen-lg mx-auto flex items-center justify-center pb-[100px]">
       <Image
         src="images/login/login_draw.svg"
         className="hidden md:block"
+        layout="responsive"
         width={462}
         height={347}
         alt="login draw"
@@ -60,7 +61,7 @@ export default function Loginpage() {
         >
           忘記密碼
         </Link>
-        <p className="text-center text-red-600 text-lg font-bold mt-[93px] pb-[200px] sm:pb-0 md:mt-5 ">
+        <p className="text-center text-red-600 text-lg font-bold mt-[93px] mb-[100px] sm:pb-0 md:mt-5 ">
           員工編號或密碼有誤
         </p>
       </div>

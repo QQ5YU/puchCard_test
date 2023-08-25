@@ -12,12 +12,13 @@ export const metadata: Metadata = {
 
 export default function ForgetPasswordPage() {
   return (
-    <div className="max-w-screen-lg mx-auto flex items-center justify-center">
+    <div className="max-w-screen-lg mx-auto flex items-center justify-center pb-[100px]">
       <Image
         src="images/login/forgetPwd_draw.svg"
         className="hidden md:block"
-        width={462}
-        height={347}
+        layout="responsive"
+        width={553}
+        height={446}
         alt="forgetPwd draw"
       />
       <Hr />
