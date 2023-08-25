@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button";
@@ -12,6 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default function LogInpage() {
+  const router = useRouter();
+  const handleLogIn = () => {
+    router.push("/gpsLocation");
+  };
+
   return (
     <div className="max-w-screen-lg mx-auto flex items-center justify-center pb-[100px]">
       <div className="hidden w-[41.6vw] h-[347px] max-w-[462px] md:flex justify-center items-center">
@@ -57,7 +64,7 @@ export default function LogInpage() {
             alt="uer-icon"
           />
         </div>
-        <Button text="登入" type="submit" />
+        <Button text="登入" type="submit" onClick={handleLogIn} />
         <Link
           href="/forgetPassword"
           className="text-right text-red-600 text-sm font-bold mt-[11px]"
