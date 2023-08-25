@@ -8,7 +8,7 @@ const useRoutes = () => {
       {
         label: "GPS 定位打卡",
         href: "/gpsLocation",
-        active: pathname === "/gpsLocation",
+        active: pathname.startsWith("/gpsLocation"),
       },
       {
         label: "打卡紀錄修改/查詢",

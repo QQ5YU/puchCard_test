@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative min-h-screen">
-        <div className="md:flex pb-[80px]">
+        <div className="md:flex pb-[80px] md:pb-0">
           <MobileSidebar />
           <DesktopSidebar />
           {children}
