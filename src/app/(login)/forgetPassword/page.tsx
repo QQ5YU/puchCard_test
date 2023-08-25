@@ -16,7 +16,6 @@ export default function ForgetPasswordPage() {
       <Image
         src="images/login/forgetPwd_draw.svg"
         className="hidden md:block"
-        layout="responsive"
         width={553}
         height={446}
         alt="forgetPwd draw"

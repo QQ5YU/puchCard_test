@@ -17,7 +17,6 @@ export default function Loginpage() {
       <Image
         src="images/login/login_draw.svg"
         className="hidden md:block"
-        layout="responsive"
         width={462}
         height={347}
         alt="login draw"
