@@ -1,6 +1,6 @@
 import { data } from "../data/data";
 import LinkComponent from "./LinkComponent";
-export default async function recordList() {
+export default function recordList() {
   return (
     <>
       {data &&

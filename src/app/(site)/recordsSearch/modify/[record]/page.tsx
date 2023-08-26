@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import Selector from "./components/Selector";
 import Title from "@/app/(site)/components/Title";
 import FileUpload from "./components/FileUpload";
@@ -10,8 +11,9 @@ export const metadata: Metadata = {
   title: "Line@ 打卡系統 修改",
 };
 export default function ModifyRecordPage({ params }: any) {
+  const router = useRouter();
   const handleSubmit = () => {
-    window.location.href = "/recordsSearch/modify/success";
+    router.push("/recordsSearch/modify/success");
   };
 
   return (
