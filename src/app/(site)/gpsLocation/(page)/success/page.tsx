@@ -3,6 +3,7 @@ import Title from "../components/Title";
 import Description from "../../components/Description";
 import LinkButton from "@/app/(site)/components/LinkButton";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "Line@ 打卡系統 GPS定位 打卡成功",
 };
@@ -22,7 +23,7 @@ export default function GpsCheckInSuccessPage() {
         highlightText="超過五分鐘未送出打卡資料"
         text2="，系統將自動將您導向回打卡頁面，請重新進行打卡。"
       />
-      <div className="mt-24 mb-[81px]">
+      <div className="mb-[81px] mt-24">
         <LinkButton
           href="/gpsLocation"
           color="bg-buttonBlueColor"

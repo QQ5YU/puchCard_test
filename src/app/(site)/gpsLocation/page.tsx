@@ -8,12 +8,14 @@ import LinkButton from "../components/LinkButton";
 import Title from "../components/Title";
 import type { Metadata } from "next";
 import Description from "./components/Description";
+import Modal from "@/app/components/Modal";
 
 export const metadata: Metadata = {
   title: "Line@ 打卡系統 GPS定位",
 };
 export default function UserLocationPage() {
   const router = useRouter();
+  const [isStartGpsLocation, setIsStartGpsLocation] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
   const [isCheckInLoading, setIsCheckInLoading] = useState<boolean>(false);
 
@@ -26,73 +28,91 @@ export default function UserLocationPage() {
     router.push("/gpsLocation/success");
   };
 
-  return (
-    <div className="flex justify-center items-center flex-col w-[38.08%] min-w-[360px] max-w-[390px] mx-auto">
-      {/* title  */}
-      <Title text="GPS 定位打卡" margin="mt-[97px]" />
-      {/* location img  */}
-      <div className="bg-[#ECECEC] rounded-lg w-[390px] h-[48.94px] mt-8 p-4 flex items-center justify-between ">
-        <label className="text-sm text-[#8B8B8B] inline-block">
-          定位我的位置
-        </label>
-        <button
-          type="button"
-          title="locationBtn"
-          className="bg-[#F03C5C] rounded-full w-[29px] h-[29px] flex justify-center items-center hover:opacity-70 transition-opacity"
-        >
-          <Image
-            src="../images/gpsLocation/NavigationArrow.svg"
-            width={19}
-            height={19}
-            alt="NavigationArrow icon"
-          ></Image>
-        </button>
-      </div>
-      {/*  description */}
-      <div className="flex flex-col items-center justify-center mt-24">
-        <Image
-          src="../images/gpsLocation/location.svg"
-          width={72}
-          height={72}
-          alt="location"
-        />
-        <p className="text-mainBlue font-bold text-2xl mt-6">
-          {checkInStateText}
-        </p>
-        <Description
-          text1="打卡後的五分鐘內請儘快修改您的打卡資料並且確保您輸入的資訊是正確且準確的若"
-          highlightText="超過五分鐘未送出打卡資料"
-          text2="，系統將自動將您導回打卡頁面，請重新進行打卡。"
-        />
-      </div>
-      {/* buttons  */}
+  const handleGpsLocation = () => {
+    setIsStartGpsLocation(true);
+  };
 
-      <div className="mt-24 mb-[81px]">
-        {isCheckInLoading === true ? (
-          <Button
-            type="submit"
-            color="bg-buttonOrangeColor"
-            text="確認送出"
-            margin="ml-[26px]"
-            onClick={handleCheckInSubmit}
+  return (
+    <>
+      {isStartGpsLocation === true && (
+        <Modal
+          content="我們需要使用您的GPS定位來記錄您的打卡位置請確保您已開啟定位服務"
+          contentStyle="font-bold"
+          href="/gpsLocation"
+          buttonText="開啟定位"
+          twoOption
+          href_2="/gpsLocation/failed"
+          buttonText_2="取消"
+        />
+      )}
+      <div className="mx-auto flex w-[38.08%] min-w-[360px] max-w-[390px] flex-col items-center justify-center">
+        {/* title  */}
+        <Title text="GPS 定位打卡" margin="mt-[97px]" />
+        {/* location img  */}
+        <div className="mt-8 flex h-[48.94px] w-[390px] items-center justify-between rounded-lg bg-[#ECECEC] p-4 ">
+          <label className="inline-block text-sm text-[#8B8B8B]">
+            定位我的位置
+          </label>
+          <button
+            type="button"
+            title="locationBtn"
+            className="flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#F03C5C] transition-opacity hover:opacity-70"
+            onClick={handleGpsLocation}
+          >
+            <Image
+              src="../images/gpsLocation/NavigationArrow.svg"
+              width={19}
+              height={19}
+              alt="NavigationArrow icon"
+            ></Image>
+          </button>
+        </div>
+        {/*  description */}
+        <div className="mt-24 flex flex-col items-center justify-center">
+          <Image
+            src="../images/gpsLocation/location.svg"
+            width={72}
+            height={72}
+            alt="location"
           />
-        ) : (
-          <>
-            <LinkButton
-              href="/recordsSearch"
-              color="bg-buttonBlueColor"
-              text="打卡紀錄查詢/修改"
-            />
+          <p className="text-mainBlue mt-6 text-2xl font-bold">
+            {checkInStateText}
+          </p>
+          <Description
+            text1="打卡後的五分鐘內請儘快修改您的打卡資料並且確保您輸入的資訊是正確且準確的若"
+            highlightText="超過五分鐘未送出打卡資料"
+            text2="，系統將自動將您導回打卡頁面，請重新進行打卡。"
+          />
+        </div>
+        {/* buttons  */}
+
+        <div className="mb-[81px] mt-24">
+          {isCheckInLoading === true ? (
             <Button
               type="submit"
               color="bg-buttonOrangeColor"
-              text="開始打卡"
+              text="確認送出"
               margin="ml-[26px]"
-              onClick={handleCheckIn}
+              onClick={handleCheckInSubmit}
             />
-          </>
-        )}
+          ) : (
+            <>
+              <LinkButton
+                href="/recordsSearch"
+                color="bg-buttonBlueColor"
+                text="打卡紀錄查詢/修改"
+              />
+              <Button
+                type="submit"
+                color="bg-buttonOrangeColor"
+                text="開始打卡"
+                margin="ml-[26px]"
+                onClick={handleCheckIn}
+              />
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

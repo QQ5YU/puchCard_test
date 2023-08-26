@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import Input from "../components/Input";
 import Hr from "../components/Hr";
 import Title from "../components/Title";
 import Description from "../components/Description";
+import Modal from "@/app/components/Modal";
 
 export const metadata: Metadata = {
   title: "Line@ 打卡系統 登入",
@@ -16,34 +17,36 @@ export const metadata: Metadata = {
 
 export default function LogInpage() {
   const router = useRouter();
-  const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState<
+    boolean | undefined
+  >(false);
   const [isAlert, setIsAlert] = useState(false);
+
   const handleLogIn = () => {
-    if (!isPasswordCorrect) {
+    if (isPasswordCorrect === false) {
       setIsAlert(true);
+    } else {
+      setIsAlert(false);
+      router.push("/gpsLocation");
     }
-    router.push("/gpsLocation");
+  };
+
+  const handleRedirect = () => {
+    setIsPasswordCorrect(undefined);
+    setIsAlert(false);
   };
 
   return (
     <>
       {isAlert === true && (
-        <div className="fixed top-0 z-10 flex h-full w-full flex-col items-center justify-center bg-white bg-opacity-60 ">
-          <div className="h-[133px] w-[354px] rounded-t-md bg-[#EAEAEA] px-[33px] py-[10px]">
-            <p className="text-center text-xl font-bold leading-10 text-[#DD614A]">
-              ⚠️ 帳號或密碼有誤 ⚠️
-            </p>
-            <p className="text-center font-normal leading-6">
-              很抱歉，您輸入的帳號或密碼有誤，請重新確認後再試一次。如果您需要任何協助，請隨時聯繫客服
-            </p>
-          </div>
-          <Link
-            href="/login"
-            className="h-[79px] w-[354px] rounded-b-md bg-[#D9D9D9] py-7"
-          >
-            <p className="text-center text-xl text-[#DD614A]">重新登入</p>
-          </Link>
-        </div>
+        <Modal
+          title="⚠️ 帳號或密碼有誤 ⚠️"
+          content="很抱歉，您輸入的帳號或密碼有誤，請重新確認後再試一次。如果您需要任何協助，請隨時聯繫客服"
+          href="/login"
+          buttonText="重新登入"
+          buttonTextColor="text-buttonOrangeColor"
+          onClick={handleRedirect}
+        />
       )}
 
       <div className="mx-auto flex max-w-screen-lg items-center justify-center pb-[100px]">
