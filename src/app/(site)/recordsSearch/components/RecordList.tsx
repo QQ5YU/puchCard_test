@@ -6,27 +6,27 @@ export default function recordList() {
       {data &&
         data.map((record) => (
           <div
-            className="flex rounded-lg shadow-record bg-[#FBFBFB] w-full py-3 pl-[10px] pr-[21p] mt-[26px]"
+            className="shadow-record mt-[26px] flex w-full rounded-lg bg-[#FBFBFB] py-3 pl-[10px] pr-[21p]"
             key={record.id}
           >
-            <div className="w-[64.62%] w-min-[252px] w-max-[260px] mr-7">
-              <div className="w-full bg-[#74ADF080] py-2 px-[19px] rounded-t-md">
+            <div className="w-min-[252px] w-max-[260px] mr-7 w-[64.62%]">
+              <div className="w-full rounded-t-md bg-[#74ADF080] px-[19px] py-2">
                 <span className="mr-7">{record.date}</span>
                 <span>{record.time}</span>
               </div>
-              <div className="w-full bg-[#6091CA20] py-2 px-[19px] rounded-b-md">
+              <div className="w-full rounded-b-md bg-[#6091CA20] px-[19px] py-2">
                 <span>{record.location}</span>
               </div>
             </div>
             <div className="flex flex-col justify-around">
               <LinkComponent
                 href={`/recordsSearch/modify/${record.id}`}
-                bgColor="buttonOrangeColor"
+                bgColor="alertRed"
                 text="修改"
               />
               <LinkComponent
                 href={`/recordsSearch/viewHistory/${record.id}`}
-                bgColor="buttonBlueColor"
+                bgColor="successBlue"
                 text="查看"
                 margin="mt-2"
               />

@@ -44,7 +44,7 @@ export default function LogInpage() {
           content="很抱歉，您輸入的帳號或密碼有誤，請重新確認後再試一次。如果您需要任何協助，請隨時聯繫客服"
           href="/login"
           buttonText="重新登入"
-          buttonTextColor="text-buttonOrangeColor"
+          buttonTextColor="text-alertRed"
           onClick={handleRedirect}
         />
       )}

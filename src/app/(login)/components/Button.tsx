@@ -9,7 +9,7 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = ({ text, type, onClick }) => {
   return (
     <button
-      className="w-full h-12 mt-[71px] rounded-[10px] border-2 border-transparent bg-buttonBlueColor font-bold text-white transition duration-[.3s] ease hover:bg-white hover:text-buttonBlueColor hover:border-buttonBlueColor"
+      className="bg-successBlue ease hover:text-successBlue hover:border-successBlue mt-[71px] h-12 w-full rounded-[10px] border-2 border-transparent font-bold text-white transition duration-[.3s] hover:bg-white"
       type={type}
       onClick={onClick}
     >

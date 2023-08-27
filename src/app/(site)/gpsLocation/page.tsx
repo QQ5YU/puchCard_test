@@ -90,7 +90,7 @@ export default function UserLocationPage() {
           {isCheckInLoading === true ? (
             <Button
               type="submit"
-              color="bg-buttonOrangeColor"
+              color="bg-alertRed"
               text="確認送出"
               margin="ml-[26px]"
               onClick={handleCheckInSubmit}
@@ -99,12 +99,12 @@ export default function UserLocationPage() {
             <>
               <LinkButton
                 href="/recordsSearch"
-                color="bg-buttonBlueColor"
+                color="bg-successBlue"
                 text="打卡紀錄查詢/修改"
               />
               <Button
                 type="submit"
-                color="bg-buttonOrangeColor"
+                color="bg-alertRed"
                 text="開始打卡"
                 margin="ml-[26px]"
                 onClick={handleCheckIn}

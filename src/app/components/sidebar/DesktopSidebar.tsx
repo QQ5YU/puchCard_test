@@ -6,10 +6,10 @@ import Footer from "./Footer";
 export default function DesktopSidebar() {
   const routes = useRoutes();
   return (
-    <aside className="hidden md:block w-1/3 min-w-[330px] max-w-[360px] bg-[#FBFBFB] min-h-screen relative">
-      <header className="flex items-center py-[43px]  mx-[44px]">
+    <aside className="relative hidden min-h-screen w-1/3 min-w-[330px] max-w-[360px] bg-[#FBFBFB] md:block">
+      <header className="mx-[44px] flex items-center  py-[43px]">
         <Image src="/images/logo.svg" width={55} height={55} alt="logo" />
-        <h1 className=" ml-2 text-2xl text-mainBlue font-bold">
+        <h1 className=" text-mainBlue ml-2 text-2xl font-bold">
           Line@ 打卡系統
         </h1>
       </header>
@@ -19,8 +19,8 @@ export default function DesktopSidebar() {
           href={link.href}
           className={
             link.active
-              ? "text-mainBlue font-bold text-xl block ml-12 my-5"
-              : "text-xl block ml-12 my-5 hover:opacity-70 transition-opacity"
+              ? "text-mainBlue my-5 ml-12 block text-xl font-bold"
+              : "my-5 ml-12 block text-xl transition-opacity hover:opacity-70"
           }
         >
           {link.label}

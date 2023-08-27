@@ -9,7 +9,6 @@ import type { Metadata } from "next";
 import { useState } from "react";
 import Modal from "@/app/components/Modal";
 
-
 export const metadata: Metadata = {
   title: "Line@ 打卡系統 重設密碼",
 };
@@ -23,7 +22,7 @@ export default function ResetPasswordPage() {
       {isSubmit === true && (
         <Modal
           content="您的新密碼已成功送出並更新。 請使用您的新密碼進行登入。"
-          contentSize="font-lg"
+          contentStyle="text-lg"
           href="/login"
           buttonText="登入"
         />

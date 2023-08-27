@@ -19,7 +19,7 @@ export default function ForgetPasswordPage() {
   };
   return (
     <>
-      <div className="mt-7 md:mt-0 h-[251px] md:h-[446px] w-[78.39%] sm:max-w-[312px] md:w-[54vw] md:max-w-[553px] flex justify-center items-center">
+      <div className="mt-7 flex h-[251px] w-[78.39%] items-center justify-center sm:max-w-[312px] md:mt-0 md:h-[446px] md:w-[54vw] md:max-w-[553px]">
         <Image
           src="images/login/forgetPwd_draw.svg"
           width={0}
@@ -29,7 +29,7 @@ export default function ForgetPasswordPage() {
         />
       </div>
       <Hr />
-      <div className="flex flex-col justify-center w-[28.22%] min-w-[320px] max-w-[340px]">
+      <div className="flex w-[28.22%] min-w-[320px] max-w-[340px] flex-col justify-center">
         <Title text="忘記密碼" className="hidden md:block" />
         <Description
           fontSize="base"
@@ -38,7 +38,7 @@ export default function ForgetPasswordPage() {
           lineHeight="leading-6"
           content="請輸入您員工編號及註冊的電子郵件，我們將向您發送重置密碼的信件。如果您需要任何協助，請隨時聯繫客服。"
         />
-        <div className="mt-6 md:mt-[30px] relative">
+        <div className="relative mt-6 md:mt-[30px]">
           <Input
             label="員工編號"
             id="member-number"
@@ -50,7 +50,7 @@ export default function ForgetPasswordPage() {
           />
         </div>
 
-        <div className="mt-[29px] relative">
+        <div className="relative mt-[29px]">
           <Input
             label="電子信箱"
             id="email"

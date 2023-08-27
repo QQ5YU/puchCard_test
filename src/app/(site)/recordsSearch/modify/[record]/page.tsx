@@ -17,32 +17,32 @@ export default function ModifyRecordPage({ params }: any) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center  w-full">
-      <div className="hidden md:block md:ml-[6%] lg:ml-[4%] md:mt-[57px]">
-        <span className="font-bold text-lg text-[#DD614A]">
+    <div className="flex min-h-screen w-full flex-col  items-center">
+      <div className="hidden md:ml-[6%] md:mt-[57px] md:block lg:ml-[4%]">
+        <span className="text-lg font-bold text-[#DD614A]">
           5:00後將打卡失敗
         </span>
-        <span className="text-[14px] text-[#DD614A] ml-1">
+        <span className="ml-1 text-[14px] text-[#DD614A]">
           系統將自動將您導回打卡頁面，重新進行打卡
         </span>
       </div>
-      <div className="w-[38.08%] min-w-[390px] max-w-[390px] mx-auto">
+      <div className="mx-auto w-[38.08%] min-w-[390px] max-w-[390px]">
         <Title text="打卡紀錄修改" margin="md:mt-[18px]" />
         <Selector />
         <FileUpload />
         <Note />
-        <div className="md:hidden mt-2 md-[35px]">
-          <span className="block font-bold text-lg text-[#DD614A] text-center">
+        <div className="md-[35px] mt-2 md:hidden">
+          <span className="block text-center text-lg font-bold text-[#DD614A]">
             5:00後將打卡失敗
           </span>
-          <span className="block text-[14px] text-[#DD614A] text-center">
+          <span className="block text-center text-[14px] text-[#DD614A]">
             系統將自動將您導回打卡頁面，重新進行打卡
           </span>
         </div>
-        <div className="flex justify-center mt-[31px] mb-[19px]">
+        <div className="mb-[19px] mt-[31px] flex justify-center">
           <Button
             type="submit"
-            color="bg-buttonOrangeColor"
+            color="bg-alertRed"
             text="確認送出"
             onClick={handleSubmit}
           />

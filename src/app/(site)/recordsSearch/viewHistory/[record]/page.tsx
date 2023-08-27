@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function viewHistoryRecordPage({ params }: any) {
   // console.log("params", params);
   return (
-    <div className="min-h-screen flex items-center flex-col w-[38.08%] min-w-[390px] max-w-[390px] mx-auto">
+    <div className="mx-auto flex min-h-screen w-[38.08%] min-w-[390px] max-w-[390px] flex-col items-center">
       {/* title  */}
       <Title text="打卡紀錄查詢" margin="mt-[97px]" />
-      <div className="bg-[#B8D4F6] rounded-[20px] min-w-[392px] w-[38.28%] max-w-[420px] min-h-[109px] py-7 px-[30px] flex flex-wrap">
+      <div className="flex min-h-[109px] w-[38.28%] min-w-[392px] max-w-[420px] flex-wrap rounded-[20px] bg-[#B8D4F6] px-[30px] py-7">
         <Span
           width="w-1/2"
           margin="mb-2"
@@ -33,7 +33,7 @@ export default function viewHistoryRecordPage({ params }: any) {
           data={recordData[params.record - 1].department}
         />
       </div>
-      <div className="bg-[#DCE6F1] rounded-[20px] min-w-[392px] w-[38.28%] max-w-[420px] min-h-[109px] mt-[21px] py-7 px-[30px]">
+      <div className="mt-[21px] min-h-[109px] w-[38.28%] min-w-[392px] max-w-[420px] rounded-[20px] bg-[#DCE6F1] px-[30px] py-7">
         <Span
           width="w-full"
           margin="mb-5"
@@ -68,7 +68,7 @@ export default function viewHistoryRecordPage({ params }: any) {
       <LinkButton
         href="/recordsSearch"
         text="確定"
-        color="bg-buttonBlueColor"
+        color="bg-successBlue"
         margin="mt-20 mb-5"
       />
     </div>
