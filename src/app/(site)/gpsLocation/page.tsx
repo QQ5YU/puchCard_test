@@ -9,27 +9,44 @@ import Title from "../components/Title";
 import type { Metadata } from "next";
 import Description from "./components/Description";
 import Modal from "@/app/components/Modal";
+import getGpsLocation from "./utils/getGpsLocation";
 
 export const metadata: Metadata = {
   title: "Line@ 打卡系統 GPS定位",
 };
 export default function UserLocationPage() {
   const router = useRouter();
+  const [address, setAddress] = useState<string | undefined>(undefined);
   const [isStartGpsLocation, setIsStartGpsLocation] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
   const [isCheckInLoading, setIsCheckInLoading] = useState<boolean>(false);
 
-  const handleCheckIn = () => {
+  // open modal window
+  const handleGpsLocation = () => {
+    navigator.permissions.query({ name: "geolocation" }).then((status) => {
+      if (status.state !== "granted") {
+        setIsStartGpsLocation(true);
+      } else {
+        handleOpenGPS();
+      }
+    });
+  };
+
+  // request gps location
+  const handleOpenGPS = () => {
     setIsCheckInLoading(true);
     setCheckInStateText("打卡中");
+    getGpsLocation().then((addressLocation) => {
+      setAddress(addressLocation as string);
+    });
+  };
+
+  const handleCheckIn = () => {
+    handleGpsLocation();
   };
 
   const handleCheckInSubmit = () => {
     router.push("/gpsLocation/success");
-  };
-
-  const handleGpsLocation = () => {
-    setIsStartGpsLocation(true);
   };
 
   return (
@@ -40,6 +57,7 @@ export default function UserLocationPage() {
           contentStyle="font-bold"
           href="/gpsLocation"
           buttonText="開啟定位"
+          onClick_1={handleOpenGPS}
           twoOption
           href_2="/gpsLocation/failed"
           buttonText_2="取消"
@@ -50,14 +68,19 @@ export default function UserLocationPage() {
         <Title text="GPS 定位打卡" margin="mt-[97px]" />
         {/* location img  */}
         <div className="mt-8 flex h-[48.94px] w-[390px] items-center justify-between rounded-lg bg-[#ECECEC] p-4 ">
-          <label className="inline-block text-sm text-[#8B8B8B]">
-            定位我的位置
+          <label
+            className={`inline-block text-sm ${
+              address !== undefined ? null : "text-[#8B8B8B]"
+            }`}
+          >
+            {address !== undefined ? address : " 定位我的位置"}
           </label>
+
           <button
             type="button"
             title="locationBtn"
             className="flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#F03C5C] transition-opacity hover:opacity-70"
-            onClick={handleGpsLocation}
+            onClick={handleCheckIn}
           >
             <Image
               src="../images/gpsLocation/NavigationArrow.svg"

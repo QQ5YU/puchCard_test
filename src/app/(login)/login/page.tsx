@@ -45,7 +45,7 @@ export default function LogInpage() {
           href="/login"
           buttonText="重新登入"
           buttonTextColor="text-alertRed"
-          onClick={handleRedirect}
+          onClick_1={handleRedirect}
         />
       )}
 

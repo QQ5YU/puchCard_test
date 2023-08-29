@@ -13,7 +13,8 @@ interface ModalProps {
   href: string;
   href_2?: string;
   twoOption?: boolean;
-  onClick?: () => void;
+  onClick_1?: () => void;
+  onClick_2?: () => void;
 }
 
 const Modal: FC<ModalProps> = ({
@@ -26,7 +27,8 @@ const Modal: FC<ModalProps> = ({
   twoOption = false,
   buttonText_2,
   href_2,
-  onClick,
+  onClick_1,
+  onClick_2,
 }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -53,7 +55,7 @@ const Modal: FC<ModalProps> = ({
             className={`block h-[79px] w-full ${
               twoOption === true ? "rounded-bl-lg" : "rounded-b-lg"
             }  bg-[#D9D9D9] py-7`}
-            onClick={onClick}
+            onClick={onClick_1}
           >
             <p className={`text-center text-xl ${buttonTextColor}`}>
               {buttonText}
@@ -63,7 +65,7 @@ const Modal: FC<ModalProps> = ({
             <Link
               href={href_2!}
               className="block h-[79px] w-full rounded-br-lg bg-[#CACACA] py-7"
-              onClick={onClick}
+              onClick={onClick_2}
             >
               <p className={`text-center text-xl ${buttonTextColor}`}>
                 {buttonText_2}
