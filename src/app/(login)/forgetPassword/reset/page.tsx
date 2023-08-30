@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { useState } from "react";
 import Modal from "@/app/components/Modal";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Line@ 打卡系統 重設密碼",
 };
 export default function ResetPasswordPage() {

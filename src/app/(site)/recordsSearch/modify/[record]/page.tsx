@@ -7,7 +7,7 @@ import { Note } from "./components/Note";
 import Button from "@/app/(site)/components/Button";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Line@ 打卡系統 修改",
 };
 export default function ModifyRecordPage({ params }: any) {

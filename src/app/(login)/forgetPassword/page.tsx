@@ -8,7 +8,7 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Line@ 打卡系統 忘記密碼",
 };
 

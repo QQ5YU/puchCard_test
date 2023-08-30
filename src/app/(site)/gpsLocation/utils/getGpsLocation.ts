@@ -22,24 +22,29 @@ const successHandler = (result: GeolocationPosition) => {
 };
 
 const errorHandler = (err: GeolocationPositionError) => {
+  location.href = "/gpsLocation/failed";
   console.log(err);
 };
 
 const getGpsLocation = () => {
   return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      (result) => {
-        successHandler(result).then(resolve).catch(reject);
-      },
-      (err) => {
-        errorHandler(err);
-        reject(err);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 5000,
-      }
-    );
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (result) => {
+          successHandler(result).then(resolve).catch(reject);
+        },
+        (err) => {
+          errorHandler(err);
+          reject(err);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
+        }
+      );
+    } else {
+      alert("你使用的瀏覽器不支援GPS定位，請嘗試使用其他瀏覽器。");
+    }
   });
 };
 

@@ -6,7 +6,7 @@ import MobileSidebar from "../components/sidebar/MobileSidebar";
 import Footer from "../components/sidebar/Footer";
 import { useState, useEffect } from "react";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Line@ 打卡系統",
   description: "專屬於員工的打卡系統",
 };

@@ -11,7 +11,7 @@ import Description from "./components/Description";
 import Modal from "@/app/components/Modal";
 import getGpsLocation from "./utils/getGpsLocation";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Line@ 打卡系統 GPS定位",
 };
 export default function UserLocationPage() {

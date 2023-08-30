@@ -4,7 +4,7 @@ import Content from "../../components/Content";
 import { useRouter } from "next/navigation";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Line@ 打卡系統 打卡記錄修改成功",
 };
 export default function SuccessPage() {
