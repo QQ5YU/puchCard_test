@@ -17,7 +17,7 @@ const metadata: Metadata = {
 export default function UserLocationPage() {
   const router = useRouter();
   const [address, setAddress] = useState<string | undefined>(undefined);
-  const [isStartGpsLocation, setIsStartGpsLocation] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
   const [isCheckInLoading, setIsCheckInLoading] = useState<boolean>(false);
 
@@ -25,8 +25,9 @@ export default function UserLocationPage() {
   const handleGpsLocation = () => {
     navigator.permissions.query({ name: "geolocation" }).then((status) => {
       if (status.state !== "granted") {
-        setIsStartGpsLocation(true);
+        setIsOpenModal(true);
       } else {
+        setIsOpenModal(false);
         handleOpenGPS();
       }
     });
@@ -37,12 +38,9 @@ export default function UserLocationPage() {
     setIsCheckInLoading(true);
     setCheckInStateText("打卡中");
     getGpsLocation().then((addressLocation) => {
+      setIsOpenModal(false);
       setAddress(addressLocation as string);
     });
-  };
-
-  const handleCheckIn = () => {
-    handleGpsLocation();
   };
 
   const handleCheckInSubmit = () => {
@@ -51,7 +49,7 @@ export default function UserLocationPage() {
 
   return (
     <>
-      {isStartGpsLocation === true && (
+      {isOpenModal === true && (
         <Modal
           content="我們需要使用您的GPS定位來記錄您的打卡位置請確保您已開啟定位服務"
           contentStyle="font-bold"
@@ -80,7 +78,7 @@ export default function UserLocationPage() {
             type="button"
             title="locationBtn"
             className="flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#F03C5C] transition-opacity hover:opacity-70"
-            onClick={handleCheckIn}
+            onClick={handleGpsLocation}
           >
             <Image
               src="../images/gpsLocation/NavigationArrow.svg"
@@ -130,7 +128,7 @@ export default function UserLocationPage() {
                 color="bg-alertRed"
                 text="開始打卡"
                 margin="ml-[26px]"
-                onClick={handleCheckIn}
+                onClick={handleGpsLocation}
               />
             </>
           )}
