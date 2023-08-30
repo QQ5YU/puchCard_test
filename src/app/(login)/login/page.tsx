@@ -1,7 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button";
@@ -11,9 +10,7 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 
-const metadata: Metadata = {
-  title: "Line@ 打卡系統 登入",
-};
+
 
 export default function LogInpage() {
   const router = useRouter();

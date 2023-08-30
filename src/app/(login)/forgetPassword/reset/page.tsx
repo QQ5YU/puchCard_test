@@ -5,13 +5,9 @@ import Input from "../../components/Input";
 import Hr from "../../components/Hr";
 import Title from "../../components/Title";
 import Description from "../../components/Description";
-import type { Metadata } from "next";
 import { useState } from "react";
 import Modal from "@/app/components/Modal";
 
-const metadata: Metadata = {
-  title: "Line@ 打卡系統 重設密碼",
-};
 export default function ResetPasswordPage() {
   const [isSubmit, setIsSubmit] = useState(false);
   const handleReset = () => {

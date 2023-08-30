@@ -6,11 +6,6 @@ import Input from "../../components/Input";
 import Hr from "../../components/Hr";
 import Title from "../../components/Title";
 import Description from "../../components/Description";
-import type { Metadata } from "next";
-
-const metadata: Metadata = {
-  title: "Line@ 打卡系統 信箱驗證",
-};
 
 export default function VerifyPage() {
   const router = useRouter();

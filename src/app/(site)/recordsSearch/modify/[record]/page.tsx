@@ -5,11 +5,7 @@ import Title from "@/app/(site)/components/Title";
 import FileUpload from "./components/FileUpload";
 import { Note } from "./components/Note";
 import Button from "@/app/(site)/components/Button";
-import type { Metadata } from "next";
 
-const metadata: Metadata = {
-  title: "Line@ 打卡系統 修改",
-};
 export default function ModifyRecordPage({ params }: any) {
   const router = useRouter();
   const handleSubmit = () => {

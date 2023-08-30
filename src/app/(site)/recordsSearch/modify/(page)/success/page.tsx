@@ -2,11 +2,7 @@
 import Title from "@/app/(site)/components/Title";
 import Content from "../../components/Content";
 import { useRouter } from "next/navigation";
-import type { Metadata } from "next";
 
-const metadata: Metadata = {
-  title: "Line@ 打卡系統 打卡記錄修改成功",
-};
 export default function SuccessPage() {
   const router = useRouter();
   const goToPrevPage = () => {
