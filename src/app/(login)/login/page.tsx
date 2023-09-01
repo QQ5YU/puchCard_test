@@ -10,26 +10,54 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 
-
-
 export default function LogInpage() {
   const router = useRouter();
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<
     boolean | undefined
   >(false);
+  const [memberNumber, setMemberNumber] = useState("");
+  const [memberPassword, setMemberPassword] = useState("");
   const [isAlert, setIsAlert] = useState(false);
 
-  const handleLogIn = () => {
-    if (isPasswordCorrect === false) {
-      setIsAlert(true);
-    } else {
-      setIsAlert(false);
-      router.push("/gpsLocation");
-    }
+  const handleLogIn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const url = "http://20.243.17.49:83/api/token/signIn/";
+    const data = {
+      EmployeeId: memberNumber,
+      Password: memberPassword,
+    };
+
+    // 0528
+    // kanasshi
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (res.ok) {
+          setIsPasswordCorrect(true);
+          setIsAlert(false);
+          router.push("/gpsLocation");
+        } else {
+          setIsPasswordCorrect(false);
+          setIsAlert(true);
+          throw new Error(data.message);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
-  const handleRedirect = () => {
+  const handleReLogin = () => {
     setIsPasswordCorrect(undefined);
+    setMemberNumber("");
+    setMemberPassword("");
     setIsAlert(false);
   };
 
@@ -42,7 +70,7 @@ export default function LogInpage() {
           href="/login"
           buttonText="重新登入"
           buttonTextColor="text-alertRed"
-          onClick_1={handleRedirect}
+          onClick_1={handleReLogin}
         />
       )}
 
@@ -67,30 +95,41 @@ export default function LogInpage() {
             fontWeight="font-bold"
             content="您好，請輸入您的員工編號及密碼"
           />
-          <div className="relative mt-[74px]">
-            <Input
-              label="員工編號"
-              id="member-number"
-              name="member-number"
-              src="images/login/user.svg"
-              width={19}
-              height={19}
-              alt="uer-icon"
-            />
-          </div>
+          <form onSubmit={handleLogIn}>
+            <div className="relative mt-[74px]">
+              <Input
+                label="員工編號"
+                id="memberNumber"
+                name="memberNumber"
+                value={memberNumber}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setMemberNumber(e.target.value)
+                }
+                src="images/login/user.svg"
+                width={19}
+                height={19}
+                alt="uer-icon"
+              />
+            </div>
 
-          <div className="relative mt-[29px]">
-            <Input
-              label="員工密碼"
-              id="member-password"
-              name="member-password"
-              src="images/login/password.svg"
-              width={19}
-              height={19}
-              alt="uer-icon"
-            />
-          </div>
-          <Button text="登入" type="submit" onClick={handleLogIn} />
+            <div className="relative mt-[29px]">
+              <Input
+                label="員工密碼"
+                id="memberPassword"
+                name="memberPassword"
+                value={memberPassword}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setMemberPassword(e.target.value)
+                }
+                src="images/login/password.svg"
+                width={19}
+                height={19}
+                alt="uer-icon"
+              />
+            </div>
+            <Button text="登入" type="submit" />
+          </form>
+
           <Link
             href="/forgetPassword"
             className="mt-[11px] text-right text-sm font-bold text-red-600"
