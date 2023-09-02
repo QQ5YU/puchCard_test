@@ -9,10 +9,10 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 import Input from "../components/Input";
-import { LuLoader2 } from "react-icons/lu";
 
 export default function LogInpage() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<
     boolean | undefined
   >(false);
@@ -22,14 +22,12 @@ export default function LogInpage() {
 
   const handleLogIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const url = "http://20.243.17.49:83/api/token/signIn/";
     const data = {
-      EmployeeId: memberNumber,
-      Password: memberPassword,
+      EmployeeId: memberNumber, // 0528
+      Password: memberPassword, // kanasshi
     };
-
-    // 0528
-    // kanasshi
 
     fetch(url, {
       method: "POST",
@@ -45,6 +43,7 @@ export default function LogInpage() {
           setIsAlert(false);
           router.push("/gpsLocation");
         } else {
+          setIsLoading(false);
           setIsPasswordCorrect(false);
           setIsAlert(true);
           throw new Error(data.message);
@@ -59,6 +58,7 @@ export default function LogInpage() {
     setIsPasswordCorrect(undefined);
     setMemberNumber("");
     setMemberPassword("");
+    setIsLoading(false);
     setIsAlert(false);
   };
 
@@ -127,7 +127,7 @@ export default function LogInpage() {
                 alt="password-icon"
               />
             </div>
-            <Button text="登入" type="submit" />
+            <Button text="登入" type="submit" isLoading={isLoading} />
           </form>
 
           <Link
