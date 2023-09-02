@@ -2,14 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="text"]:focus ~ label > img {
+.input:focus,
+.input:not(:placeholder-shown).input:not(:focus) {
+    @apply border-mainBlue;
+}
+
+.input:focus ~ label > img,
+.input:not(:placeholder-shown).input:not(:focus)
+ ~ label > img {
     @apply scale-0 opacity-0 hidden
 }
 
-input[type="text"]:focus ~ label {
-    @apply text-mainBlue scale-75 translate-x-1.5 -translate-y-4 bg-white px-1.5 leading-normal rounded
+.input:focus
+ ~ label > span,
+ .input:not(:placeholder-shown).input:not(:focus)
+ ~ label > span  {
+    @apply text-mainBlue
 }
+
+.input:focus
+~ label.input-text,
+.input:not(:placeholder-shown).input:not(:focus)
+~ label.input-text {
+    @apply  bg-white px-2 bg-opacity-100 py-0 rounded-lg  scale-75 -translate-x-2 -translate-y-7;
+}
+
 
 #memberPassword {
     -webkit-text-security: disc;
-}
+} 

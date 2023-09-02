@@ -10,7 +10,8 @@ import Modal from "@/app/components/Modal";
 
 export default function ResetPasswordPage() {
   const [isSubmit, setIsSubmit] = useState(false);
-  const handleReset = () => {
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmit(true);
   };
   return (
@@ -42,30 +43,39 @@ export default function ResetPasswordPage() {
           lineHeight="leading-6"
           content="請輸入您的新密碼並確認，以完成密碼重設，您可以使用新密碼登入您的帳號。 如果您需要任何協助，請隨時聯繫客服。"
         />
-
-        <div className="relative mt-6 md:mt-[30px]">
-          <Input
-            label="請輸入新密碼"
-            id="new-password"
-            name="new-password"
-            src="../images/login/password.svg"
-            width={19}
-            height={19}
-            alt="password-icon"
-          />
-        </div>
-        <div className="relative mt-[30px]">
-          <Input
-            label="請再次確認您的新密碼"
-            id="reset-password"
-            name="reset-password"
-            src="../images/login/password.svg"
-            width={19}
-            height={19}
-            alt="password-icon"
-          />
-        </div>
-        <Button text="送出" type="submit" onClick={handleReset} />
+        <form onSubmit={handleReset}>
+          <div className="relative mt-6 md:mt-[30px]">
+            <Input
+              id="newPassword"
+              name="newPassword"
+              label="newPassword"
+              placeholder="請輸入新密碼"
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   setMemberNumber(e.target.value)
+              // }
+              src="../images/login/password.svg"
+              width={19}
+              height={19}
+              alt="password-icon"
+            />
+          </div>
+          <div className="relative mt-[30px]">
+            <Input
+              id="resetPassword"
+              name="resetPassword"
+              label="resetPassword"
+              placeholder="請再次確認您的新密碼"
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   setMemberNumber(e.target.value)
+              // }
+              src="../images/login/password.svg"
+              width={19}
+              height={19}
+              alt="password-icon"
+            />
+          </div>
+          <Button text="送出" type="submit" />
+        </form>
       </div>
     </>
   );

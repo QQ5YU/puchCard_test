@@ -11,7 +11,6 @@ import Description from "./components/Description";
 import Modal from "@/app/components/Modal";
 import getGpsLocation from "./utils/getGpsLocation";
 
-
 export default function UserLocationPage() {
   const router = useRouter();
   const [address, setAddress] = useState<string | undefined>(undefined);
@@ -75,7 +74,7 @@ export default function UserLocationPage() {
           <button
             type="button"
             title="locationBtn"
-            className="flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#F03C5C] transition-opacity hover:opacity-70"
+            className="ml-2 flex h-[29px] w-[29px] items-center justify-center rounded-full bg-[#F03C5C] transition-opacity hover:opacity-70"
             onClick={handleGpsLocation}
           >
             <Image

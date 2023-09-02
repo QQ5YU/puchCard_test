@@ -4,11 +4,12 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button";
-import Input from "../components/Input";
 import Hr from "../components/Hr";
 import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
+import Input from "../components/Input";
+import { LuLoader2 } from "react-icons/lu";
 
 export default function LogInpage() {
   const router = useRouter();
@@ -96,12 +97,12 @@ export default function LogInpage() {
             content="您好，請輸入您的員工編號及密碼"
           />
           <form onSubmit={handleLogIn}>
-            <div className="relative mt-[74px]">
+            <div className="mt-20">
               <Input
-                label="員工編號"
                 id="memberNumber"
                 name="memberNumber"
-                value={memberNumber}
+                label="memberNumber"
+                placeholder="員工編號"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setMemberNumber(e.target.value)
                 }
@@ -111,20 +112,19 @@ export default function LogInpage() {
                 alt="uer-icon"
               />
             </div>
-
-            <div className="relative mt-[29px]">
+            <div className="mt-[29px]">
               <Input
-                label="員工密碼"
                 id="memberPassword"
                 name="memberPassword"
-                value={memberPassword}
+                label="memberPassword"
+                placeholder="員工密碼"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setMemberPassword(e.target.value)
                 }
                 src="images/login/password.svg"
                 width={19}
                 height={19}
-                alt="uer-icon"
+                alt="password-icon"
               />
             </div>
             <Button text="登入" type="submit" />

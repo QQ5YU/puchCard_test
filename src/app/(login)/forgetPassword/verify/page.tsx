@@ -9,7 +9,8 @@ import Description from "../../components/Description";
 
 export default function VerifyPage() {
   const router = useRouter();
-  const handleVerifyCode = () => {
+  const handleVerifyCode = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     router.push("/forgetPassword/reset");
   };
   return (
@@ -34,19 +35,24 @@ export default function VerifyPage() {
           lineHeight="leading-6"
           content="我們已將驗證碼發送到您的註冊電子郵件， 請查看並輸入，如果您沒有收到驗證碼， 請檢查垃圾郵件或選擇重新發送驗證碼。"
         />
-
-        <div className="relative mt-6 md:mt-[30px]">
-          <Input
-            label="輸入驗證碼"
-            id="verify-code"
-            name="verify-code"
-            src="../images/login/receive.svg"
-            width={19}
-            height={19}
-            alt="receive-icon"
-          />
-        </div>
-        <Button text="驗證" type="submit" onClick={handleVerifyCode} />
+        <form onSubmit={handleVerifyCode}>
+          <div className="relative mt-6 md:mt-[30px]">
+            <Input
+              id="verifyCode"
+              name="verifyCode"
+              label="verifyCode"
+              placeholder="輸入驗證碼"
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   setMemberNumber(e.target.value)
+              // }
+              src="../images/login/receive.svg"
+              width={19}
+              height={19}
+              alt="receive-icon"
+            />
+          </div>
+          <Button text="驗證" type="submit" />
+        </form>
       </div>
     </>
   );

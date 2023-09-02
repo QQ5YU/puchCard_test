@@ -7,10 +7,10 @@ import Hr from "../components/Hr";
 import Title from "../components/Title";
 import Description from "../components/Description";
 
-
 export default function ForgetPasswordPage() {
   const router = useRouter();
-  const handleClick = () => {
+  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     router.push("/forgetPassword/verify");
   };
   return (
@@ -34,30 +34,40 @@ export default function ForgetPasswordPage() {
           lineHeight="leading-6"
           content="請輸入您員工編號及註冊的電子郵件，我們將向您發送重置密碼的信件。如果您需要任何協助，請隨時聯繫客服。"
         />
-        <div className="relative mt-6 md:mt-[30px]">
-          <Input
-            label="員工編號"
-            id="member-number"
-            name="member-number"
-            src="images/login/user.svg"
-            width={19}
-            height={19}
-            alt="draw"
-          />
-        </div>
+        <form onSubmit={handleClick}>
+          <div className="relative mt-6 md:mt-[30px]">
+            <Input
+              id="memberNumber"
+              name="memberNumber"
+              label="memberNumber"
+              placeholder="員工編號"
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   setMemberNumber(e.target.value)
+              // }
+              src="images/login/user.svg"
+              width={19}
+              height={19}
+              alt="uer-icon"
+            />
+          </div>
 
-        <div className="relative mt-[29px]">
-          <Input
-            label="電子信箱"
-            id="email"
-            name="email"
-            src="images/login/email.svg"
-            width={19}
-            height={19}
-            alt="email-icon"
-          />
-        </div>
-        <Button text="寄送驗證碼" type="submit" onClick={handleClick} />
+          <div className="relative mt-[29px]">
+            <Input
+              id="memberEmail"
+              name="memberEmail"
+              label="memberEmail"
+              placeholder="電子信箱"
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              // setMemberNumber(e.target.value)
+              // }
+              src="images/login/email.svg"
+              width={19}
+              height={19}
+              alt="email-icon"
+            />
+          </div>
+          <Button text="寄送驗證碼" type="submit" />
+        </form>
       </div>
     </>
   );

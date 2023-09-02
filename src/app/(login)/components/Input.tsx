@@ -1,57 +1,57 @@
 import { FC } from "react";
 import Image from "next/image";
 
-interface InputProps {
+interface Input2Props {
   label: string;
-  value: string;
+  id: string;
+  name: string;
+  placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   src: string;
   width: number;
   height: number;
   alt: string;
-  id: string;
-  name: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: FC<InputProps> = ({
+const Input: FC<Input2Props> = ({
   label,
-  value,
+  id,
+  name,
+  placeholder,
+  onChange,
   src,
   width,
   height,
   alt,
-  id,
-  name,
-  onChange,
 }) => {
   return (
     <>
-      <input
-        className="bg-loginInputColor focus:outline-mainBlue h-12 w-full rounded-[10px] px-4 py-2"
-        type="text"
-        value={value}
-        id={id}
-        name={name}
-        onChange={onChange}
-      />
-      <label
-        htmlFor={id}
-        className={`absolute left-0 ${
-          value !== ""
-            ? "text-mainBlue -translate-y-4 translate-x-1.5 scale-75 rounded bg-white px-1.5 leading-normal"
-            : " bg-transparent px-4 leading-[48px] text-gray-400 transition duration-200  ease-out"
-        }
-          `}
-      >
-        <Image
-          src={src}
-          width={width}
-          height={height}
-          className={value !== "" ? "hidden" : "mr-4 inline-block align-middle"}
-          alt={alt}
+      <div className="relative h-12">
+        <input
+          type="text"
+          id={id}
+          name={name}
+          autoComplete="off"
+          placeholder=" "
+          onChange={onChange}
+          className="bg-loginInputColor input absolute left-0 top-0 h-full w-full rounded-[10px] border-2 border-transparent px-4 py-2 outline-none transition duration-200"
         />
-        <span className="align-middle font-bold">{label}</span>
-      </label>
+        <label
+          htmlFor={label}
+          className="input-text absolute left-4 top-3 bg-opacity-0 transition duration-200"
+        >
+          <Image
+            src={src}
+            width={width}
+            height={height}
+            className="mr-4 inline-block align-middle"
+            alt={alt}
+          />
+          <span className="align-middle font-bold text-gray-400">
+            {placeholder}
+          </span>
+        </label>
+      </div>
     </>
   );
 };
