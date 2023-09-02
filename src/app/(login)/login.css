@@ -28,6 +28,6 @@
 }
 
 
-#memberPassword {
+input[id$='Password'] {
     -webkit-text-security: disc;
 } 
