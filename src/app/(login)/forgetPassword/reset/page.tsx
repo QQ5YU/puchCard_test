@@ -48,6 +48,7 @@ export default function ResetPasswordPage() {
             <Input
               id="newPassword"
               name="newPassword"
+              value=""
               label="newPassword"
               placeholder="請輸入新密碼"
               // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -63,6 +64,7 @@ export default function ResetPasswordPage() {
             <Input
               id="resetPassword"
               name="resetPassword"
+              value=""
               label="resetPassword"
               placeholder="請再次確認您的新密碼"
               // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

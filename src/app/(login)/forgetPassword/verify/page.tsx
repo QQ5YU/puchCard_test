@@ -41,6 +41,7 @@ export default function VerifyPage() {
               id="verifyCode"
               name="verifyCode"
               label="verifyCode"
+              value=""
               placeholder="輸入驗證碼"
               // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               //   setMemberNumber(e.target.value)

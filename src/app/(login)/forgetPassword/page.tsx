@@ -40,6 +40,7 @@ export default function ForgetPasswordPage() {
               id="memberNumber"
               name="memberNumber"
               label="memberNumber"
+              value=""
               placeholder="員工編號"
               // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               //   setMemberNumber(e.target.value)
@@ -55,6 +56,7 @@ export default function ForgetPasswordPage() {
             <Input
               id="memberEmail"
               name="memberEmail"
+              value=""
               label="memberEmail"
               placeholder="電子信箱"
               // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
