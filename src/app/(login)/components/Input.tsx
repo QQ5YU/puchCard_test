@@ -6,6 +6,7 @@ interface Input2Props {
   id: string;
   name: string;
   placeholder: string;
+  value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   src: string;
   width: number;
@@ -18,6 +19,7 @@ const Input: FC<Input2Props> = ({
   id,
   name,
   placeholder,
+  value,
   onChange,
   src,
   width,
@@ -32,6 +34,7 @@ const Input: FC<Input2Props> = ({
           id={id}
           name={name}
           autoComplete="off"
+          value={value}
           placeholder=" "
           onChange={onChange}
           className="bg-loginInputColor input absolute left-0 top-0 h-full w-full rounded-[10px] border-2 border-transparent px-4 py-2 outline-none transition duration-200"

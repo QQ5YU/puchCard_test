@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Provider from "./Context/Provider";
 
 export const metadata: Metadata = {
   title: "Line@ 打卡系統",
@@ -19,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <Provider>
+        <body>{children}</body>
+      </Provider>
     </html>
   );
 }

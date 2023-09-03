@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button";
@@ -12,52 +13,53 @@ import Input from "../components/Input";
 
 export default function LogInpage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
+  if (status === "authenticated") router.push("/gpsLocation");
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<
     boolean | undefined
   >(false);
-  const [memberNumber, setMemberNumber] = useState("");
-  const [memberPassword, setMemberPassword] = useState("");
+  const [authState, setAuthState] = useState({
+    EmployeeId: "",
+    Password: "",
+  });
   const [isAlert, setIsAlert] = useState(false);
 
-  const handleLogIn = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthState((old) => ({ ...old, [e.target.id]: e.target.value }));
+  };
+
+  const handleLogIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const url = "http://20.243.17.49:83/api/token/signIn/";
-    const data = {
-      EmployeeId: memberNumber, // 0528
-      Password: memberPassword, // kanasshi
-    };
-
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
+    signIn("credentials", {
+      ...authState,
+      redirect: false,
     })
-      .then(async (res) => {
-        const data = await res.json();
-        if (res.ok) {
+      .then((res) => {
+        console.log(res);
+        if (res?.error) {
+          setIsLoading(false);
+          setIsAlert(true);
+        } else {
           setIsPasswordCorrect(true);
           setIsAlert(false);
           router.push("/gpsLocation");
-        } else {
-          setIsLoading(false);
-          setIsPasswordCorrect(false);
-          setIsAlert(true);
-          throw new Error(data.message);
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        console.error(err);
+        setIsLoading(false);
+        setIsAlert(true);
       });
   };
 
   const handleReLogin = () => {
     setIsPasswordCorrect(undefined);
-    setMemberNumber("");
-    setMemberPassword("");
+    setAuthState({
+      EmployeeId: "",
+      Password: "",
+    });
     setIsLoading(false);
     setIsAlert(false);
   };
@@ -99,13 +101,12 @@ export default function LogInpage() {
           <form onSubmit={handleLogIn}>
             <div className="mt-20">
               <Input
-                id="memberNumber"
-                name="memberNumber"
-                label="memberNumber"
+                id="EmployeeId"
+                name="EmployeeId"
+                label="EmployeeId"
+                value={authState.EmployeeId}
                 placeholder="員工編號"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setMemberNumber(e.target.value)
-                }
+                onChange={handleFieldChange}
                 src="images/login/user.svg"
                 width={19}
                 height={19}
@@ -114,13 +115,12 @@ export default function LogInpage() {
             </div>
             <div className="mt-[29px]">
               <Input
-                id="memberPassword"
-                name="memberPassword"
-                label="memberPassword"
+                id="Password"
+                name="Password"
+                label="Password"
+                value={authState.Password}
                 placeholder="員工密碼"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setMemberPassword(e.target.value)
-                }
+                onChange={handleFieldChange}
                 src="images/login/password.svg"
                 width={19}
                 height={19}
@@ -136,9 +136,11 @@ export default function LogInpage() {
           >
             忘記密碼
           </Link>
-          <p className="mb-[100px] mt-[93px] text-center text-lg font-bold text-red-600 sm:pb-0 md:mt-5 ">
-            員工編號或密碼有誤
-          </p>
+          {isAlert === true && (
+            <p className="mb-[100px] mt-[93px] text-center text-lg font-bold text-red-600 sm:pb-0 md:mt-5 ">
+              員工編號或密碼有誤
+            </p>
+          )}
         </div>
       </div>
     </>
