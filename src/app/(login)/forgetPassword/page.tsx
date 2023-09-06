@@ -6,15 +6,72 @@ import Input from "../components/Input";
 import Hr from "../components/Hr";
 import Title from "../components/Title";
 import Description from "../components/Description";
+import { useState } from "react";
+import axios from "axios";
+import Modal from "@/app/components/Modal";
 
 export default function ForgetPasswordPage() {
   const router = useRouter();
-  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isAlert, setIsAlert] = useState(false);
+  const [message, setMessage] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const [authState, setAuthState] = useState({
+    email: "",
+    employeeId: "",
+  });
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthState((old) => ({ ...old, [e.target.id]: e.target.value }));
+  };
+
+  const handleCloseAlert = () => {
+    setIsAlert(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const url = "http://20.243.17.49:83/api/ForgetPassword/Send";
     e.preventDefault();
-    router.push("/forgetPassword/verify");
+    const decodeEmail = decodeURIComponent(authState.email);
+    const decodeEmployeeId = decodeURIComponent(authState.employeeId);
+    console.log(decodeEmail);
+    axios({
+      method: "get",
+      url: url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {
+        email: decodeEmail,
+        employeeId: decodeEmployeeId,
+        // C109118108@nkust.edu.tw
+        // 0534
+      },
+    })
+      .then((res) => {
+        // console.log(res);
+        setMessage(res.data.message);
+        setIsAlert(true);
+        setRedirect(true);
+      })
+      .catch((err) => {
+        setIsAlert(true);
+        setRedirect(false);
+        setMessage(err.response.data.message);
+        console.log(err);
+      });
   };
   return (
     <>
+      {isAlert === true && (
+        <Modal
+          content={message}
+          contentStyle="text-lg"
+          href={
+            redirect === true ? "/forgetPassword/verify" : "/forgetPassword"
+          }
+          buttonText="確定"
+          onClick_1={handleCloseAlert}
+        />
+      )}
       <div className="mt-7 flex h-[251px] w-[78.39%] items-center justify-center sm:max-w-[312px] md:mt-0 md:h-[446px] md:w-[54vw] md:max-w-[553px]">
         <Image
           src="images/login/forgetPwd_draw.svg"
@@ -34,17 +91,15 @@ export default function ForgetPasswordPage() {
           lineHeight="leading-6"
           content="請輸入您員工編號及註冊的電子郵件，我們將向您發送重置密碼的信件。如果您需要任何協助，請隨時聯繫客服。"
         />
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleSubmit}>
           <div className="relative mt-6 md:mt-[30px]">
             <Input
-              id="memberNumber"
-              name="memberNumber"
-              label="memberNumber"
-              value=""
+              id="employeeId"
+              name="employeeId"
+              label="employeeId"
+              value={authState.employeeId}
               placeholder="員工編號"
-              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              //   setMemberNumber(e.target.value)
-              // }
+              onChange={handleFieldChange}
               src="images/login/user.svg"
               width={19}
               height={19}
@@ -54,14 +109,12 @@ export default function ForgetPasswordPage() {
 
           <div className="relative mt-[29px]">
             <Input
-              id="memberEmail"
-              name="memberEmail"
-              value=""
-              label="memberEmail"
+              id="email"
+              name="email"
+              value={authState.email}
+              label="email"
               placeholder="電子信箱"
-              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              // setMemberNumber(e.target.value)
-              // }
+              onChange={handleFieldChange}
               src="images/login/email.svg"
               width={19}
               height={19}

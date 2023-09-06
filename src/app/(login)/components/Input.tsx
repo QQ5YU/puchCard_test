@@ -36,6 +36,7 @@ const Input: FC<Input2Props> = ({
           autoComplete="off"
           value={value}
           placeholder=" "
+          required
           onChange={onChange}
           className="bg-loginInputColor input absolute left-0 top-0 h-full w-full rounded-[10px] border-2 border-transparent px-4 py-2 outline-none transition duration-200"
         />

@@ -16,12 +16,9 @@ export default function LogInpage() {
   const { data: session, status } = useSession();
   if (status === "authenticated") router.push("/gpsLocation");
   const [isLoading, setIsLoading] = useState(false);
-  const [isPasswordCorrect, setIsPasswordCorrect] = useState<
-    boolean | undefined
-  >(false);
   const [authState, setAuthState] = useState({
-    EmployeeId: "",
-    Password: "",
+    employeeId: "",
+    password: "",
   });
   const [isAlert, setIsAlert] = useState(false);
 
@@ -42,7 +39,6 @@ export default function LogInpage() {
           setIsLoading(false);
           setIsAlert(true);
         } else {
-          setIsPasswordCorrect(true);
           setIsAlert(false);
           router.push("/gpsLocation");
         }
@@ -55,10 +51,9 @@ export default function LogInpage() {
   };
 
   const handleReLogin = () => {
-    setIsPasswordCorrect(undefined);
     setAuthState({
-      EmployeeId: "",
-      Password: "",
+      employeeId: "",
+      password: "",
     });
     setIsLoading(false);
     setIsAlert(false);
@@ -101,10 +96,10 @@ export default function LogInpage() {
           <form onSubmit={handleLogIn}>
             <div className="mt-20">
               <Input
-                id="EmployeeId"
-                name="EmployeeId"
-                label="EmployeeId"
-                value={authState.EmployeeId}
+                id="employeeId"
+                name="employeeId"
+                label="employeeId"
+                value={authState.employeeId}
                 placeholder="員工編號"
                 onChange={handleFieldChange}
                 src="images/login/user.svg"
@@ -115,10 +110,10 @@ export default function LogInpage() {
             </div>
             <div className="mt-[29px]">
               <Input
-                id="Password"
-                name="Password"
-                label="Password"
-                value={authState.Password}
+                id="password"
+                name="password"
+                label="password"
+                value={authState.password}
                 placeholder="員工密碼"
                 onChange={handleFieldChange}
                 src="images/login/password.svg"
