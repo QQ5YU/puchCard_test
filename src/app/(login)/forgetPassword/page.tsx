@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "../components/Button";
 import Input from "../components/Input";
@@ -11,8 +10,7 @@ import axios from "axios";
 import Modal from "@/app/components/Modal";
 
 export default function ForgetPasswordPage() {
-  const router = useRouter();
-  let verificationCode = "";
+  const [isLoading, setIsLoading] = useState(false);
   const [isAlert, setIsAlert] = useState(false);
   const [message, setMessage] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -25,10 +23,12 @@ export default function ForgetPasswordPage() {
   };
 
   const handleCloseAlert = () => {
+    setIsLoading(false);
     setIsAlert(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
     const url = "http://20.243.17.49:83/api/ForgetPassword/Send";
     e.preventDefault();
     const decodeEmail = decodeURIComponent(authState.email);
@@ -47,9 +47,7 @@ export default function ForgetPasswordPage() {
       },
     })
       .then((res) => {
-        console.log(res);
-        verificationCode = res.data.data;
-        console.log(verificationCode);
+        localStorage.setItem("verificationCode", res.data.data);
         setMessage(res.data.message);
         setIsAlert(true);
         setRedirect(true);
@@ -68,9 +66,7 @@ export default function ForgetPasswordPage() {
           content={message}
           contentStyle="text-lg"
           href={
-            redirect === true
-              ? `/forgetPassword/verify?=code${verificationCode}`
-              : "/forgetPassword"
+            redirect === true ? "/forgetPassword/verify" : "/forgetPassword"
           }
           buttonText="確定"
           onClick_1={handleCloseAlert}
@@ -125,7 +121,7 @@ export default function ForgetPasswordPage() {
               alt="email-icon"
             />
           </div>
-          <Button text="寄送驗證碼" type="submit" />
+          <Button text="寄送驗證碼" type="submit" isLoading={isLoading} />
         </form>
       </div>
     </>

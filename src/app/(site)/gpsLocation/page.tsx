@@ -6,13 +6,15 @@ import "../style/style.css";
 import Button from "../components/Button";
 import LinkButton from "../components/LinkButton";
 import Title from "../components/Title";
-import type { Metadata } from "next";
+import axios from "axios";
 import Description from "./components/Description";
 import Modal from "@/app/components/Modal";
 import getGpsLocation from "./utils/getGpsLocation";
+import { useSession } from "next-auth/react";
 
 export default function UserLocationPage() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
@@ -38,9 +40,16 @@ export default function UserLocationPage() {
       setIsOpenModal(false);
       setAddress(addressLocation as string);
     });
+    console.log(data);
   };
 
   const handleCheckInSubmit = () => {
+    const url = "http://20.243.17.49:83/api/CreatePunch/";
+    axios.post(url, {
+      Headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
     router.push("/gpsLocation/success");
   };
 

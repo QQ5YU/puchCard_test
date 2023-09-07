@@ -1,20 +1,55 @@
 "use client";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Hr from "../../components/Hr";
 import Title from "../../components/Title";
 import Description from "../../components/Description";
+import { useState } from "react";
+import Modal from "@/app/components/Modal";
 
 export default function VerifyPage() {
-  const router = useRouter();
+  const [isAlert, setIsAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const [verificationCode, setVerificationCode] = useState("");
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVerificationCode(e.target.value);
+  };
   const handleVerifyCode = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push("/forgetPassword/reset");
+    const compareCode = localStorage.getItem("verificationCode");
+    console.log(verificationCode);
+    if (compareCode === verificationCode) {
+      setMessage("驗證成功，即將前往修改密碼。");
+      setRedirect(true);
+      setIsAlert(true);
+    } else {
+      setMessage("驗證碼輸入錯誤，請重新回信件確認驗證碼再輸入。");
+      setIsAlert(true);
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setIsLoading(false);
+    setIsAlert(false);
   };
   return (
     <>
+      {isAlert === true && (
+        <Modal
+          content={message}
+          contentStyle="text-lg"
+          href={
+            redirect === true
+              ? "/forgetPassword/reset"
+              : "/forgetPassword/verify"
+          }
+          buttonText="確定"
+          onClick_1={handleCloseAlert}
+        />
+      )}
       <div className="mt-7 flex h-[251px] w-[78.39%] items-center justify-center sm:max-w-[312px] md:mt-0 md:h-[446px] md:w-[54vw] md:max-w-[553px]">
         <Image
           src="../images/login/verify.svg"
@@ -41,18 +76,16 @@ export default function VerifyPage() {
               id="verifyCode"
               name="verifyCode"
               label="verifyCode"
-              value=""
+              value={verificationCode}
               placeholder="輸入驗證碼"
-              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              //   setMemberNumber(e.target.value)
-              // }
+              onChange={handleFieldChange}
               src="../images/login/receive.svg"
               width={19}
               height={19}
               alt="receive-icon"
             />
           </div>
-          <Button text="驗證" type="submit" />
+          <Button text="驗證" type="submit" isLoading={isLoading} />
         </form>
       </div>
     </>
