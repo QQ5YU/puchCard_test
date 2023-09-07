@@ -40,7 +40,6 @@ export default function UserLocationPage() {
       setIsOpenModal(false);
       setAddress(addressLocation as string);
     });
-    console.log(data);
   };
 
   const handleCheckInSubmit = () => {

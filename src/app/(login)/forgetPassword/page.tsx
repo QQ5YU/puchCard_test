@@ -47,6 +47,7 @@ export default function ForgetPasswordPage() {
       },
     })
       .then((res) => {
+        localStorage.setItem("email", decodeEmail);
         localStorage.setItem("verificationCode", res.data.data);
         setMessage(res.data.message);
         setIsAlert(true);

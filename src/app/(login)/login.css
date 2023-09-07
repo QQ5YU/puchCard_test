@@ -28,6 +28,7 @@
 }
 
 
-input[id$='password'] {
+input[id$='password'],
+input[id$='Password'] {
     -webkit-text-security: disc;
 } 

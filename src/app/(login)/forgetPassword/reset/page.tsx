@@ -7,16 +7,49 @@ import Title from "../../components/Title";
 import Description from "../../components/Description";
 import { useState } from "react";
 import Modal from "@/app/components/Modal";
+import axios from "axios";
 
 export default function ResetPasswordPage() {
-  const [isSubmit, setIsSubmit] = useState(false);
+  let userEmail: string | null = "";
+  if (typeof window !== "undefined") {
+    userEmail = localStorage.getItem("email");
+  }
+  const [isAlert, setIsAlert] = useState(false);
+  const [resetPassword, setResetPassword] = useState({
+    email: userEmail,
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setResetPassword((old) => ({ ...old, [e.target.id]: e.target.value }));
+  };
+
   const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmit(true);
+    const url = "http://20.243.17.49:83/api/ForgetPassword/RestPassword";
+    const data = {
+      email: resetPassword.email,
+      newPassword: resetPassword.newPassword,
+    };
+    axios
+      .put(url, data, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setIsAlert(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("發生錯誤...請重新嘗試");
+      });
   };
   return (
     <>
-      {isSubmit === true && (
+      {isAlert === true && (
         <Modal
           content="您的新密碼已成功送出並更新。 請使用您的新密碼進行登入。"
           contentStyle="text-lg"
@@ -48,12 +81,10 @@ export default function ResetPasswordPage() {
             <Input
               id="newPassword"
               name="newPassword"
-              value=""
+              value={resetPassword.newPassword}
               label="newPassword"
               placeholder="請輸入新密碼"
-              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              //   setMemberNumber(e.target.value)
-              // }
+              onChange={handleFieldChange}
               src="../images/login/password.svg"
               width={19}
               height={19}
@@ -62,14 +93,12 @@ export default function ResetPasswordPage() {
           </div>
           <div className="relative mt-[30px]">
             <Input
-              id="resetPassword"
-              name="resetPassword"
-              value=""
-              label="resetPassword"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={resetPassword.confirmPassword}
+              label="confirmPassword"
               placeholder="請再次確認您的新密碼"
-              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              //   setMemberNumber(e.target.value)
-              // }
+              onChange={handleFieldChange}
               src="../images/login/password.svg"
               width={19}
               height={19}
