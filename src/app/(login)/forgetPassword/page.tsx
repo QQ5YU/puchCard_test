@@ -12,6 +12,7 @@ import Modal from "@/app/components/Modal";
 
 export default function ForgetPasswordPage() {
   const router = useRouter();
+  let verificationCode = "";
   const [isAlert, setIsAlert] = useState(false);
   const [message, setMessage] = useState("");
   const [redirect, setRedirect] = useState(false);
@@ -32,7 +33,6 @@ export default function ForgetPasswordPage() {
     e.preventDefault();
     const decodeEmail = decodeURIComponent(authState.email);
     const decodeEmployeeId = decodeURIComponent(authState.employeeId);
-    console.log(decodeEmail);
     axios({
       method: "get",
       url: url,
@@ -47,7 +47,9 @@ export default function ForgetPasswordPage() {
       },
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
+        verificationCode = res.data.data;
+        console.log(verificationCode);
         setMessage(res.data.message);
         setIsAlert(true);
         setRedirect(true);
@@ -66,7 +68,9 @@ export default function ForgetPasswordPage() {
           content={message}
           contentStyle="text-lg"
           href={
-            redirect === true ? "/forgetPassword/verify" : "/forgetPassword"
+            redirect === true
+              ? `/forgetPassword/verify?=code${verificationCode}`
+              : "/forgetPassword"
           }
           buttonText="確定"
           onClick_1={handleCloseAlert}

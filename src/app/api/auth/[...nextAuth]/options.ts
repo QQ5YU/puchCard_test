@@ -7,14 +7,14 @@ export const options: NextAuthOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials) {
-        const { EmployeeId, Password } = credentials as {
-          EmployeeId: string;
-          Password: string;
+        const { employeeId, password } = credentials as {
+          employeeId: string;
+          password: string;
         };
         const url = "http://20.243.17.49:83/api/token/signIn/";
         const res = await fetch(url, {
           method: "POST",
-          body: JSON.stringify({ EmployeeId, Password }),
+          body: JSON.stringify({ employeeId, password }),
           headers: {
             "Content-Type": "application/json",
           },
