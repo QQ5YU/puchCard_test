@@ -32,15 +32,13 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en">
-      <body className="relative min-h-screen">
-        <div className="md:flex pb-[80px] md:pb-0">
-          <MobileSidebar />
-          <DesktopSidebar />
-          {children}
-        </div>
-        {isSmWidth && <Footer />}
-      </body>
-    </html>
+    <div className="relative min-h-screen">
+      <div className="pb-[80px] md:flex md:pb-0">
+        <MobileSidebar />
+        <DesktopSidebar />
+        {children}
+      </div>
+      {isSmWidth && <Footer />}
+    </div>
   );
 }

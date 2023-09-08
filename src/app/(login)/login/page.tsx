@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
@@ -14,13 +14,15 @@ import Input from "../components/Input";
 export default function LogInpage() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  if (status === "authenticated") router.push("/gpsLocation");
   const [isLoading, setIsLoading] = useState(false);
   const [authState, setAuthState] = useState({
     employeeId: "",
     password: "",
   });
   const [isAlert, setIsAlert] = useState(false);
+  useEffect(() => {
+    if (status === "authenticated") router.push("/gpsLocation");
+  }, [status, router]);
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState((old) => ({ ...old, [e.target.id]: e.target.value }));
