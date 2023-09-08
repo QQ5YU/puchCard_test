@@ -74,8 +74,8 @@ export default function LogInpage() {
         />
       )}
 
-      <div className="mx-auto flex max-w-screen-lg items-center justify-center pb-[100px]">
-        <div className="hidden h-[347px] w-[41.6vw] max-w-[462px] items-center justify-center md:flex">
+      <div className="mx-auto flex w-full max-w-screen-lg items-center justify-center pb-[100px]">
+        <div className="hidden h-[347px] w-[41.6vw] max-w-[426px] items-center justify-center md:flex">
           <Image
             src="images/login/login_draw.svg"
             className="hidden md:block"
@@ -85,9 +85,8 @@ export default function LogInpage() {
             alt="login draw"
           />
         </div>
-
         <Hr />
-        <div className="flex flex-col justify-center">
+        <div className="flex w-[30.7%] min-w-[310px] max-w-[315px] flex-col justify-center">
           <Title text="登入" />
           <Description
             fontSize="lg"
