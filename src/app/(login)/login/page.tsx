@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button";
@@ -10,20 +9,16 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 import Input from "../components/Input";
+import axios from "axios";
 
 export default function LogInPage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [authState, setAuthState] = useState({
     employeeId: "",
     password: "",
   });
   const [isAlert, setIsAlert] = useState(false);
-  if (session) console.log(session);
-  useEffect(() => {
-    if (status === "authenticated") router.push("/gpsLocation");
-  }, [status, router]);
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState((old) => ({ ...old, [e.target.id]: e.target.value }));
@@ -32,18 +27,30 @@ export default function LogInPage() {
   const handleLogIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    signIn("credentials", {
-      ...authState,
-      redirect: false,
-    })
+
+    const url = "http://20.243.17.49:83/api/token/signIn/";
+    axios
+      .post(
+        url,
+        {
+          employeeId: authState.employeeId,
+          password: authState.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
-        if (res?.error) {
+        if (res.status === 200) {
+          setIsAlert(false);
+          router.push("/gpsLocation");
+        } else {
           setIsLoading(false);
           setIsAlert(true);
-        } else {
-          setIsAlert(false);
-          // router.push("/gpsLocation");
         }
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);

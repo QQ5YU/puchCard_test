@@ -10,12 +10,9 @@ import axios from "axios";
 import Description from "./components/Description";
 import Modal from "@/app/components/Modal";
 import getGpsLocation from "./utils/getGpsLocation";
-import { useSession } from "next-auth/react";
 
 export default function UserLocationPage() {
   const router = useRouter();
-  const { data } = useSession();
-  console.log(data);
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");

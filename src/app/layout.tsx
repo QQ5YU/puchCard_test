@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import NextAuthSessionProvider from "./Context/NextAuthSessionProvider";
 
 export const metadata: Metadata = {
   title: "Line@ 打卡系統",
@@ -20,9 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
