@@ -1,10 +1,10 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import axios from "axios";
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {},
       async authorize(credentials) {
         const { employeeId, password } = credentials as {
@@ -12,21 +12,27 @@ export const options: NextAuthOptions = {
           password: string;
         };
         const url = "http://20.243.17.49:83/api/token/signIn/";
-        const res = await fetch(url, {
-          method: "POST",
-          body: JSON.stringify({ employeeId, password }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await res.json();
-        if (res.ok) {
-          return data.access_token;
-        } else {
-          throw new Error(
-            `LogInError: status: ${res.status} , ${data.message}`
-          );
-        }
+        const { data } = await axios
+          .post(
+            url,
+            {
+              employeeId: employeeId,
+              password: password,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+            return res.data;
+          })
+          .catch((err) => {
+            throw new Error(JSON.stringify(err.response.data));
+          });
+        return { data } as any;
       },
     }),
   ],
@@ -35,5 +41,5 @@ export const options: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
-  // pages: { signIn: "/login" },
+  pages: { signIn: "/login" },
 };

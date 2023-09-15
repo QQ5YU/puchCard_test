@@ -11,7 +11,7 @@ import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 import Input from "../components/Input";
 
-export default function LogInpage() {
+export default function LogInPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +20,7 @@ export default function LogInpage() {
     password: "",
   });
   const [isAlert, setIsAlert] = useState(false);
+  if (session) console.log(session);
   useEffect(() => {
     if (status === "authenticated") router.push("/gpsLocation");
   }, [status, router]);
@@ -36,13 +37,12 @@ export default function LogInpage() {
       redirect: false,
     })
       .then((res) => {
-        console.log(res);
         if (res?.error) {
           setIsLoading(false);
           setIsAlert(true);
         } else {
           setIsAlert(false);
-          router.push("/gpsLocation");
+          // router.push("/gpsLocation");
         }
       })
       .catch((err) => {

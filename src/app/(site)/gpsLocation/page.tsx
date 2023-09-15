@@ -14,7 +14,8 @@ import { useSession } from "next-auth/react";
 
 export default function UserLocationPage() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data } = useSession();
+  console.log(data);
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
