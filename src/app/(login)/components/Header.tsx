@@ -12,12 +12,12 @@ export default function Header() {
             ? "images/logo.svg"
             : "../images/logo.svg"
         }
-        width={pathName.startsWith("/forgetPassword") ? 32 : 55}
-        height={pathName.startsWith("/forgetPassword") ? 32 : 55}
+        width={pathName?.startsWith("/forgetPassword") ? 32 : 55}
+        height={pathName?.startsWith("/forgetPassword") ? 32 : 55}
         alt="logo"
       />
       <h1 className=" ml-2 text-3xl text-mainBlue font-bold">
-        {pathName.startsWith("/forgetPassword") ? "忘記密碼" : "Line@ 打卡系統"}
+        {pathName?.startsWith("/forgetPassword") ? "忘記密碼" : "Line@ 打卡系統"}
       </h1>
     </header>
   );
