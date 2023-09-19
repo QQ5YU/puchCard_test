@@ -13,7 +13,7 @@ export default function ForgetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isAlert, setIsAlert] = useState(false);
   const [message, setMessage] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState("");
   const [authState, setAuthState] = useState({
     email: "",
     employeeId: "",
@@ -33,6 +33,7 @@ export default function ForgetPasswordPage() {
     e.preventDefault();
     const decodeEmail = decodeURIComponent(authState.email);
     const decodeEmployeeId = decodeURIComponent(authState.employeeId);
+
     axios({
       method: "get",
       url: url,
@@ -49,14 +50,17 @@ export default function ForgetPasswordPage() {
       .then((res) => {
         localStorage.setItem("email", decodeEmail);
         localStorage.setItem("verificationCode", res.data.data);
+
         setMessage(res.data.message);
         setIsAlert(true);
-        setRedirect(true);
+        setRedirectUrl("/forgetPassword/verify");
       })
       .catch((err) => {
         setIsAlert(true);
-        setRedirect(false);
         setMessage(err.response.data.message);
+        if (err.response.status === 400)
+          setRedirectUrl("/forgetPassword/verify");
+        else setRedirectUrl("/forgetPassword");
         console.log(err);
       });
   };
@@ -66,9 +70,7 @@ export default function ForgetPasswordPage() {
         <Modal
           content={message}
           contentStyle="text-lg"
-          href={
-            redirect === true ? "/forgetPassword/verify" : "/forgetPassword"
-          }
+          href={redirectUrl}
           buttonText="確定"
           onClick_1={handleCloseAlert}
         />

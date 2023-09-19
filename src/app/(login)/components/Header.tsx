@@ -5,19 +5,19 @@ import Image from "next/image";
 export default function Header() {
   const pathName = usePathname();
   return (
-    <header className="flex justify-center md:justify-start items-center sm:ml-14 mt-[55px] mb-[40px]">
+    <header className="mb-[40px] mt-[55px] flex items-center justify-center sm:ml-14 md:justify-start">
       <Image
         src={
           pathName === "/login" || pathName === "/forgetPassword"
             ? "images/logo.svg"
             : "../images/logo.svg"
         }
-        width={pathName.startsWith("/forgetPassword") ? 32 : 55}
-        height={pathName.startsWith("/forgetPassword") ? 32 : 55}
+        width={pathName!.startsWith("/forgetPassword") ? 32 : 55}
+        height={pathName!.startsWith("/forgetPassword") ? 32 : 55}
         alt="logo"
       />
-      <h1 className=" ml-2 text-3xl text-mainBlue font-bold">
-        {pathName.startsWith("/forgetPassword") ? "忘記密碼" : "Line@ 打卡系統"}
+      <h1 className=" text-mainBlue ml-2 text-3xl font-bold">
+        {pathName!.startsWith("/forgetPassword") ? "忘記密碼" : "Line@ 打卡系統"}
       </h1>
     </header>
   );

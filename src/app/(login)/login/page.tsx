@@ -1,7 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../components/Button";
@@ -10,25 +9,22 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 import Input from "../components/Input";
+import { signIn } from "next-auth/react";
 
-export default function LogInpage() {
+export default function LogInPage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [authState, setAuthState] = useState({
     employeeId: "",
     password: "",
   });
   const [isAlert, setIsAlert] = useState(false);
-  useEffect(() => {
-    if (status === "authenticated") router.push("/gpsLocation");
-  }, [status, router]);
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAuthState((old) => ({ ...old, [e.target.id]: e.target.value }));
   };
 
-  const handleLogIn = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     signIn("credentials", {
@@ -51,6 +47,39 @@ export default function LogInpage() {
         setIsAlert(true);
       });
   };
+
+  // const handleLogIn = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   const url = "http://20.243.17.49:83/api/token/signIn/";
+  //   const data = {
+  //     employeeId: authState.employeeId,
+  //     password: authState.password,
+  //   };
+  //   axios
+  //     .post(url, data, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         // console.log(res);
+  //         setIsAlert(false);
+  //         localStorage.setItem("access_token", res.data.access_token);
+  //         router.push("/gpsLocation");
+  //       } else {
+  //         setIsLoading(false);
+  //         setIsAlert(true);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       setIsLoading(false);
+  //       setIsAlert(true);
+  //     });
+  // };
 
   const handleReLogin = () => {
     setAuthState({
