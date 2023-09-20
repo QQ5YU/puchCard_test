@@ -11,13 +11,11 @@ app
   .prepare()
   .then(() => {
     const server = express();
-    // 配置反向代理以处理 NextAuth.js 路由
+    // express 中的一個配置選項default=false 表示該不該信任proxy
     server.set("trust proxy", 1);
-    
     server.all("*", (req, res) => {
       return handle(req, res);
     });
-
     server.listen(port, (err) => {
       if (err) throw err;
       console.log("> Ready on http://localhost:81");

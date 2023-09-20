@@ -14,7 +14,7 @@ export const authOptions = {
       async authorize(credentials, req) {
         try {
           const { employeeId, password } = credentials as AuthData;
-          const url = "http://20.243.17.49:83/api/token/signIn/";
+          const url = `${process.env.NEXT_APP_BASE_URL}/api/token/signIn/`;
           const authData = {
             employeeId: employeeId,
             password: password,

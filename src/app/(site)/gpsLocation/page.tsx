@@ -41,7 +41,7 @@ export default function UserLocationPage() {
   };
 
   const handleCheckInSubmit = () => {
-    const url = "http://20.243.17.49:83/api/CreatePunch/";
+    const url = `${process.env.NEXT_APP_BASE_URL}/api/CreatePunch/`;
     axios.post(url, {
       Headers: {
         "Content-Type": "application/x-www-form-urlencoded",

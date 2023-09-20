@@ -27,7 +27,7 @@ export default function ResetPasswordPage() {
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const url = "http://20.243.17.49:83/api/ForgetPassword/RestPassword";
+    const url = `${process.env.NEXT_APP_BASE_URL}/api/ForgetPassword/RestPassword`;
     const data = {
       email: resetPassword.email,
       newPassword: resetPassword.newPassword,

@@ -29,7 +29,7 @@ export default function ForgetPasswordPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
-    const url = "http://20.243.17.49:83/api/ForgetPassword/Send";
+    const url = `${process.env.NEXT_APP_BASE_URL}/api/ForgetPassword/Send`;
     e.preventDefault();
     const decodeEmail = decodeURIComponent(authState.email);
     const decodeEmployeeId = decodeURIComponent(authState.employeeId);
