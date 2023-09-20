@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 
-interface Input2Props {
+interface InputProps {
   label: string;
   id: string;
   name: string;
@@ -14,7 +14,7 @@ interface Input2Props {
   alt: string;
 }
 
-const Input: FC<Input2Props> = ({
+const Input: FC<InputProps> = ({
   label,
   id,
   name,
