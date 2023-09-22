@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import axiosInstance from "../axiosInstance";
 interface AuthData {
   employeeId: string;
   password: string;
@@ -14,21 +15,24 @@ export const authOptions = {
       async authorize(credentials, req) {
         try {
           const { employeeId, password } = credentials as AuthData;
-          const url = `${process.env.NEXT_APP_BASE_URL}/api/token/signIn/`;
           const authData = {
             employeeId: employeeId,
             password: password,
           };
-          const res = await axios.post(url, authData, {
+          const res = await axiosInstance.post("/api/token/signIn/", authData, {
             headers: {
               "Content-Type": "application/json",
             },
           });
 
           if (res.statusText === "OK") {
-            console.log({ ...credentials });
             const jwtToken: string = res.data.access_token;
-            return { ...credentials, jwt: jwtToken } as any;
+            return {
+              user: {
+                employeeId: employeeId,
+                accessToken: jwtToken,
+              },
+            } as any;
           }
           return null;
         } catch (err) {
@@ -38,6 +42,19 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }: any) {
+      // console.log("--------- token ----------", { ...token });
+      // console.log("--------- user -------: ", { ...user });
+      return { ...token, ...user };
+    },
+    async session({ session, token }: any) {
+      session.user.employeeId = token.user.employeeId;
+      session.user.accessToken = token.user.accessToken;
+      // console.log("--------- session ----------", session);
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
   pages: { signIn: "/login" },

@@ -7,7 +7,6 @@ import Title from "../../components/Title";
 import Description from "../../components/Description";
 import { useState } from "react";
 import Modal from "@/app/components/Modal";
-import axios from "axios";
 
 export default function ResetPasswordPage() {
   let userEmail: string | null = "";
@@ -27,24 +26,25 @@ export default function ResetPasswordPage() {
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const url = `${process.env.NEXT_APP_BASE_URL}/api/ForgetPassword/RestPassword`;
+    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/resetPassword`;
     const data = {
       email: resetPassword.email,
       newPassword: resetPassword.newPassword,
     };
-    axios
-      .put(url, data, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify(data),
+    })
       .then((res) => {
         console.log(res);
-        setIsAlert(true);
+        if (!res.ok) alert("發生錯誤...請重新嘗試");
+        else setIsAlert(true);
       })
       .catch((err) => {
         console.log(err);
-        alert("發生錯誤...請重新嘗試");
       });
   };
   return (

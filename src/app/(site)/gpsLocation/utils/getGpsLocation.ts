@@ -12,6 +12,7 @@ const successHandler = (result: GeolocationPosition) => {
         for (let i = address.length - 1; i >= 0; i--) {
           addressLocation += `${address[i]}`;
         }
+        addressLocation = addressLocation.replace(/\s/g, "");
         resolve(addressLocation);
       })
       .catch((err) => {

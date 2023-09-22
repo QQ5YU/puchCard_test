@@ -1,22 +1,30 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import "../style/style.css";
 import Button from "../components/Button";
 import LinkButton from "../components/LinkButton";
 import Title from "../components/Title";
-import axios from "axios";
 import Description from "./components/Description";
 import Modal from "@/app/components/Modal";
 import getGpsLocation from "./utils/getGpsLocation";
+import "../style/style.css";
 
 export default function UserLocationPage() {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
   const [isCheckInLoading, setIsCheckInLoading] = useState<boolean>(false);
+  const [recordData, setRecordData] = useState({
+    punch_addr: "",
+    punch_notes: "",
+    punch_type: "",
+    access_token: session?.user.accessToken,
+  });
 
   // open modal window
   const handleGpsLocation = () => {
@@ -37,17 +45,25 @@ export default function UserLocationPage() {
     getGpsLocation().then((addressLocation) => {
       setIsOpenModal(false);
       setAddress(addressLocation as string);
+      setRecordData({ ...recordData, punch_addr: addressLocation as string });
     });
   };
 
   const handleCheckInSubmit = () => {
-    const url = `${process.env.NEXT_APP_BASE_URL}/api/CreatePunch/`;
-    axios.post(url, {
-      Headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
-    router.push("/gpsLocation/success");
+    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/createRecord`;
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(recordData),
+    })
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) router.push("/gpsLocation/success");
+        else router.push("/gpsLocation/failed");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("發生錯誤，請重新嘗試....");
+      });
   };
 
   return (

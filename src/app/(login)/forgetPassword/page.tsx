@@ -6,7 +6,6 @@ import Hr from "../components/Hr";
 import Title from "../components/Title";
 import Description from "../components/Description";
 import { useState } from "react";
-import axios from "axios";
 import Modal from "@/app/components/Modal";
 
 export default function ForgetPasswordPage() {
@@ -27,42 +26,35 @@ export default function ForgetPasswordPage() {
     setIsAlert(false);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
-    const url = `${process.env.NEXT_APP_BASE_URL}/api/ForgetPassword/Send`;
     e.preventDefault();
-    const decodeEmail = decodeURIComponent(authState.email);
-    const decodeEmployeeId = decodeURIComponent(authState.employeeId);
 
-    axios({
-      method: "get",
-      url: url,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      params: {
-        email: decodeEmail,
-        employeeId: decodeEmployeeId,
-        // C109118108@nkust.edu.tw
-        // 0534
-      },
-    })
-      .then((res) => {
-        localStorage.setItem("email", decodeEmail);
-        localStorage.setItem("verificationCode", res.data.data);
+    const authData = {
+      email: authState.email,
+      employeeId: authState.employeeId,
+    };
 
-        setMessage(res.data.message);
+    try {
+      const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/forgetPassword?email=${authData.email}&employeeId=${authData.employeeId}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (res.status === 200) {
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("verificationCode", data.verifyCode);
+        setMessage(data.message);
         setIsAlert(true);
         setRedirectUrl("/forgetPassword/verify");
-      })
-      .catch((err) => {
+      }
+      if (!res.ok) {
         setIsAlert(true);
-        setMessage(err.response.data.message);
-        if (err.response.status === 400)
-          setRedirectUrl("/forgetPassword/verify");
+        setMessage(data.message);
+        if (res.status === 400) setRedirectUrl("/forgetPassword/verify");
         else setRedirectUrl("/forgetPassword");
-        console.log(err);
-      });
+      }
+    } catch (err: any) {
+      console.log(err);
+    }
   };
   return (
     <>
