@@ -1,19 +1,22 @@
 "use client";
 import LinkComponent from "./LinkComponent";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function RecordList() {
   const { data: session } = useSession();
+  const router = useRouter();
   const [data, setData] = useState([]);
   const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/getHistoryRecords`;
   useEffect(() => {
     fetch(url)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
-        setData(data.data);
+        if (data.status === 401) {
+          alert(data.message);
+          signOut();
+        } else setData(data.data);
       })
       .catch((err) => {
         console.log(err);

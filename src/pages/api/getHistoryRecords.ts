@@ -7,18 +7,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions);
-  console.log(session);
   try {
-    // if (!session.user.accessToken) {
-    //   alert("plz reLogin.");
-    //   return {
-    //     redirect: {
-    //       destination: "/",
-    //       permanent: false,
-    //     },
-    //   };
-    // }
+    const session = await getServerSession(req, res, authOptions);
+    // console.log(session);
     const token = session.user.accessToken;
     // console.log(" --------------- token ----------------", token);
     axiosInstance
@@ -37,9 +28,14 @@ export default async function handler(
       })
       .catch((err) => {
         console.log("err-------------------------", err);
-        return res.status(err.response.status).json({
-          message: err.response.data.message,
-        });
+        if (err.response.status === 401) {
+          return res
+            .status(401)
+            .json({ status: 401, message: "登入超時，請重新登入" });
+        } else
+          return res.status(err.response.status).json({
+            message: err.response.data.message,
+          });
       });
   } catch (err) {
     return res.status(500).json({
