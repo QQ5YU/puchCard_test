@@ -9,11 +9,13 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import Modal from "@/app/components/Modal";
 import Input from "../components/Input";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
 
 export default function LogInPage() {
   const router = useRouter();
+  const { status } = useSession();
+  if (status === "authenticated") router.push("/gpsLocation");
   const [isLoading, setIsLoading] = useState(false);
   const [authState, setAuthState] = useState({
     employeeId: "",

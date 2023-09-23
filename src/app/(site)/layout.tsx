@@ -5,7 +5,6 @@ import DesktopSidebar from "../components/sidebar/DesktopSidebar";
 import MobileSidebar from "../components/sidebar/MobileSidebar";
 import Footer from "../components/sidebar/Footer";
 import { useState, useEffect } from "react";
-import NextAuthProvider from "../context/SessionProvider";
 
 const metadata: Metadata = {
   title: "Line@ 打卡系統",
@@ -33,15 +32,13 @@ export default function RootLayout({
   }, []);
 
   return (
-    <NextAuthProvider>
-      <div className="relative min-h-screen">
-        <div className="pb-[80px] md:flex md:pb-0">
-          <MobileSidebar />
-          <DesktopSidebar />
-          {children}
-        </div>
-        {isSmWidth && <Footer />}
+    <div className="relative min-h-screen">
+      <div className="pb-[80px] md:flex md:pb-0">
+        <MobileSidebar />
+        <DesktopSidebar />
+        {children}
       </div>
-    </NextAuthProvider>
+      {isSmWidth && <Footer />}
+    </div>
   );
 }

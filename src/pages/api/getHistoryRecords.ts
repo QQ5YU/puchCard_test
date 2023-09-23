@@ -8,9 +8,19 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions);
+  console.log(session);
   try {
+    // if (!session.user.accessToken) {
+    //   alert("plz reLogin.");
+    //   return {
+    //     redirect: {
+    //       destination: "/",
+    //       permanent: false,
+    //     },
+    //   };
+    // }
     const token = session.user.accessToken;
-
+    // console.log(" --------------- token ----------------", token);
     axiosInstance
       .get("/api/PunchRecordSearch/AdminGetAllPunch", {
         headers: {
