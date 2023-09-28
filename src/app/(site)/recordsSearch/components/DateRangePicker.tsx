@@ -1,6 +1,6 @@
 "use client";
 import { DateRange, Range, RangeKeyDict } from "react-date-range";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Input from "../../components/Input";
@@ -8,7 +8,13 @@ import Input from "../../components/Input";
 // mainDoc: https://github.com/hypeserver/react-date-range
 // RefDoc: https://github.com/EvgeniyBudaev/react-typescript-ui/blob/master/src/uikit/components/DatePicker/DateRangePicker/DateRangePicker.tsx
 
-export default function DateRangePicker() {
+interface DateRangePickerProps {
+  onDateChange: (date: Range[] | undefined) => void;
+}
+
+export default function DateRangePicker({
+  onDateChange,
+}: DateRangePickerProps) {
   const [dateRange, setDateRange] = useState<Range[] | undefined>([
     {
       startDate: new Date(),
@@ -16,9 +22,9 @@ export default function DateRangePicker() {
       key: "selection",
     },
   ]);
-
   const [inputClick, setInputClick] = useState(false);
   const rangeColor = ["#033492"];
+
   const handleSelect = (ranges: RangeKeyDict) => {
     const { selection } = ranges;
     setDateRange([selection]);
@@ -44,6 +50,10 @@ export default function DateRangePicker() {
   const handleDivMouseLeave = () => {
     setInputClick(false);
   };
+
+  useEffect(() => {
+    if (onDateChange) onDateChange(dateRange);
+  }, [onDateChange, dateRange]);
 
   return (
     <>

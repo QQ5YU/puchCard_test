@@ -3,6 +3,7 @@ import { FC } from "react";
 
 interface InputProps {
   onClick?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onMouseLeave?: () => void;
   inputClassName?: string;
   readOnly?: boolean;
@@ -19,6 +20,7 @@ interface InputProps {
 const Input: FC<InputProps> = ({
   margin,
   onClick,
+  onChange,
   inputType,
   id,
   name,
@@ -40,6 +42,7 @@ const Input: FC<InputProps> = ({
         type={inputType}
         id={id}
         onClick={onClick}
+        onChange={onChange}
         name={name}
         placeholder={placeholder}
         {...inputProps}
