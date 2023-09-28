@@ -2,10 +2,9 @@
 import Title from "@/app/(site)/components/Title";
 import LinkButton from "@/app/(site)/components/LinkButton";
 import Span from "./components/Span";
-// import { useState, useEffect } from "react";
-// import { signOut, useSession } from "next-auth/react";
 import type { Metadata } from "next";
 import { useRecordData } from "@/app/context/RecordDataContext";
+import handleDateTime from "../../actions/handleDateTime";
 
 export const metadata: Metadata = {
   title: "Line@ 打卡系統 打卡記錄查詢",
@@ -14,8 +13,7 @@ export const metadata: Metadata = {
 export default function ViewHistoryRecordPage({ params }: any) {
   const { recordData } = useRecordData();
   console.log(recordData);
-  // const [data, setData] = useState([]);
-  // console.log("params", params);
+  const dateTime = handleDateTime(recordData[params.record].vw_datetime);
 
   return (
     <div className="mx-auto flex min-h-screen w-[38.08%] min-w-[390px] max-w-[390px] flex-col items-center">
@@ -39,7 +37,7 @@ export default function ViewHistoryRecordPage({ params }: any) {
           width="w-full"
           margin="mb-5"
           label="日期"
-          data={recordData[params.record].vw_datetime}
+          data={dateTime.originTime}
         />
         <Span
           width="w-full"
@@ -57,7 +55,11 @@ export default function ViewHistoryRecordPage({ params }: any) {
           width="w-full"
           margin="mb-5"
           label="照片"
-          data={recordData[params.record].vw_img}
+          data={
+            recordData[params.record].vw_img === null
+              ? "無照片"
+              : recordData[params.record].vw_img
+          }
         />
         <Span
           width="w-full"

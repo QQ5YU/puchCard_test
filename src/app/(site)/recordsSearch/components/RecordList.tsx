@@ -4,12 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Range } from "react-date-range";
 import { useRecordData } from "@/app/context/RecordDataContext";
+import handleDateTime from "../actions/handleDateTime";
 
 function renderRecord(record: recordType, index: number) {
-  const originTime = new Date(record.vw_datetime).toLocaleString();
-  const datetime = originTime.split(" ");
-  const date = datetime[0];
-  const time = datetime[1].slice(0, -3);
+  const dateTime = handleDateTime(record.vw_datetime);
   return (
     <div
       className="shadow-record mt-[26px] flex w-full rounded-lg bg-[#FBFBFB] py-3 pl-[10px] pr-[21p]"
@@ -17,8 +15,8 @@ function renderRecord(record: recordType, index: number) {
     >
       <div className="w-min-[252px] w-max-[260px] mr-7 w-[64.62%]">
         <div className="w-full rounded-t-md bg-[#74ADF080] px-[19px] py-2">
-          <span className="mr-7">{date}</span>
-          <span>{time}</span>
+          <span className="mr-7">{dateTime.date}</span>
+          <span>{dateTime.time}</span>
         </div>
         <div className="w-full rounded-b-md bg-[#6091CA20] px-[19px] py-2">
           <span>{record.vw_addr}</span>
