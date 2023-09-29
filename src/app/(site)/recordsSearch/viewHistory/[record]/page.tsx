@@ -17,7 +17,6 @@ export default function ViewHistoryRecordPage({ params }: any) {
 
   return (
     <div className="mx-auto flex min-h-screen w-[38.08%] min-w-[390px] max-w-[390px] flex-col items-center">
-      {/* title  */}
       <Title text="打卡紀錄查詢" margin="mt-[97px]" />
       <div className="flex min-h-[109px] w-[38.28%] min-w-[392px] max-w-[420px] flex-wrap rounded-[20px] bg-[#B8D4F6] px-[30px] py-7">
         <Span

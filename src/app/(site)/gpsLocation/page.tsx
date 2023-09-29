@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Button from "../components/Button";
 import LinkButton from "../components/LinkButton";
@@ -14,7 +14,6 @@ import "../style/style.css";
 export default function UserLocationPage() {
   const router = useRouter();
   const { data: session } = useSession();
-
   const [address, setAddress] = useState<string | undefined>(undefined);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [checkInStateText, setCheckInStateText] = useState<string>("立即打卡");
@@ -55,9 +54,13 @@ export default function UserLocationPage() {
       method: "POST",
       body: JSON.stringify(recordData),
     })
-      .then((result) => {
-        console.log(result);
-        if (result.status === 200) router.push("/gpsLocation/success");
+      .then((result) => result.json())
+      .then((data) => {
+        if (data.status === 401) {
+          alert(data.message);
+          signOut();
+        }
+        if (data.status === 200) router.push("/gpsLocation/success");
         else router.push("/gpsLocation/failed");
       })
       .catch((err) => {

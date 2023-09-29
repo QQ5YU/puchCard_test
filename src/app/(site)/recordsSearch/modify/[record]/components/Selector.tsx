@@ -2,11 +2,13 @@
 import { FC } from "react";
 import { useState } from "react";
 import Option from "./Option";
-import { options } from "../data/option";
 import Input from "@/app/(site)/components/Input";
-interface SelectorProps {}
+import { options } from "../utils/options";
+interface SelectorProps {
+  onSelect: (value: number) => void;
+}
 
-const Selector: FC<SelectorProps> = () => {
+const Selector: FC<SelectorProps> = ({ onSelect }) => {
   const [openOptions, setOpenOptions] = useState(false);
   const [optionContent, setOptionContent] = useState("請選擇打卡類型");
   const handleClick = () => {
@@ -14,8 +16,12 @@ const Selector: FC<SelectorProps> = () => {
   };
   const handleClickOption = (e: React.MouseEvent<HTMLDivElement>) => {
     const div = e.currentTarget;
-    const option = div.querySelector("span")!.textContent;
-    setOptionContent(option!);
+    const option = div.querySelector("span")?.textContent;
+    if (option) {
+      setOptionContent(option);
+      const selectOption = options.find((o) => o.type === option);
+      if (selectOption) onSelect(selectOption.id);
+    }
     setOpenOptions(false);
   };
   return (

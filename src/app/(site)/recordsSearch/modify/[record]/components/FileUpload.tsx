@@ -1,7 +1,12 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-export default function FileUpload() {
+
+export default function FileUpload({
+  onUpload,
+}: {
+  onUpload: (value: string) => void;
+}) {
   const [fileName, setFileName] = useState("");
   const [image, setImage] = useState<string | undefined>(undefined);
   const [validFileType, setValidFileType] = useState(true);
@@ -9,7 +14,9 @@ export default function FileUpload() {
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const upLoadFile = e.target.files?.[0];
     if (upLoadFile) {
+      console.log(e);
       if (upLoadFile.type.startsWith("image/")) {
+        onUpload(`/images/records/${upLoadFile.name}`);
         setFileName(upLoadFile.name);
         setImage(URL.createObjectURL(upLoadFile));
       } else {
