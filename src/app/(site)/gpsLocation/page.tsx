@@ -128,13 +128,13 @@ export default function UserLocationPage() {
           />
         </div>
         {/* buttons  */}
-
         <div className="mb-[81px] mt-24">
           {isCheckInLoading === true ? (
             <Button
               type="submit"
               color="bg-alertRed"
               text="確認送出"
+              disabled={address === undefined ? true : false}
               margin="ml-[26px]"
               onClick={handleCheckInSubmit}
             />
