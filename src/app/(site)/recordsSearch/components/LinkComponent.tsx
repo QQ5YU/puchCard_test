@@ -1,19 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
 
-interface LinkComponentProps {
-  href: string;
-  bgColor: string;
-  text: string;
-  margin?: string;
-}
-
-const LinkComponent: FC<LinkComponentProps> = ({
-  href,
-  bgColor,
-  text,
-  margin,
-}) => {
+const LinkComponent: FC<LinkButton> = ({ href, bgColor, text, margin }) => {
   return (
     <Link
       href={href}

@@ -1,17 +1,11 @@
 import { FC } from "react";
 import Image from "next/image";
 
-interface InputProps {
+interface InputProps extends Input {
   label: string;
-  id: string;
-  name: string;
-  placeholder: string;
   value: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  src: string;
   width: number;
   height: number;
-  alt: string;
 }
 
 const Input: FC<InputProps> = ({
@@ -21,7 +15,7 @@ const Input: FC<InputProps> = ({
   placeholder,
   value,
   onChange,
-  src,
+  imgSrc,
   width,
   height,
   alt,
@@ -45,7 +39,7 @@ const Input: FC<InputProps> = ({
           className="input-text absolute left-4 top-3 bg-opacity-0 transition duration-200"
         >
           <Image
-            src={src}
+            src={imgSrc}
             width={width}
             height={height}
             className="mr-4 inline-block align-middle"

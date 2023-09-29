@@ -1,7 +1,6 @@
 import { FC } from "react";
 
-interface TitleProps {
-  text: string;
+interface TitleProps extends Title {
   className?: string;
 }
 

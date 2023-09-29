@@ -109,7 +109,7 @@ export default function LogInPage() {
                 value={authState.employeeId}
                 placeholder="員工編號"
                 onChange={handleFieldChange}
-                src="images/login/user.svg"
+                imgSrc="images/login/user.svg"
                 width={19}
                 height={19}
                 alt="uer-icon"
@@ -123,7 +123,7 @@ export default function LogInPage() {
                 value={authState.password}
                 placeholder="員工密碼"
                 onChange={handleFieldChange}
-                src="images/login/password.svg"
+                imgSrc="images/login/password.svg"
                 width={19}
                 height={19}
                 alt="password-icon"

@@ -1,20 +1,14 @@
 import Image from "next/image";
 import { FC } from "react";
 
-interface InputProps {
-  onClick?: () => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onMouseLeave?: () => void;
+interface InputProps extends Input {
   inputClassName?: string;
   readOnly?: boolean;
   margin?: string;
   inputType: "text";
-  id: string;
-  name: string;
-  placeholder: string;
   buttonType: "submit" | "button";
-  imgSrc: string;
-  alt: string;
+  onClick?: () => void;
+  onMouseLeave?: () => void;
 }
 
 const Input: FC<InputProps> = ({

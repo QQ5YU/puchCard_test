@@ -60,8 +60,9 @@ export default function UserLocationPage() {
           alert(data.message);
           signOut();
         }
-        if (data.status === 200) router.push("/gpsLocation/success");
-        else router.push("/gpsLocation/failed");
+        if (data.status === 200) {
+          router.push("/gpsLocation/success");
+        } else router.push("/gpsLocation/failed");
       })
       .catch((err) => {
         console.log(err);
@@ -142,7 +143,7 @@ export default function UserLocationPage() {
             <>
               <LinkButton
                 href="/recordsSearch"
-                color="bg-successBlue"
+                bgColor="successBlue"
                 text="打卡紀錄查詢/修改"
               />
               <Button

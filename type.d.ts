@@ -1,3 +1,30 @@
+interface Title {
+  text: string;
+}
+
+interface Button {
+  text: string;
+  type: "submit" | "button";
+  isLoading?: boolean;
+  onClick?: () => void;
+}
+
+interface LinkButton {
+  href: string;
+  text: string;
+  bgColor: string;
+  margin?: string;
+}
+
+interface Input {
+  alt: string;
+  id: string;
+  name: string;
+  placeholder: string;
+  imgSrc: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 type recordType = {
   vw_employee: string;
   vw_type: string;

@@ -26,12 +26,12 @@ export default function GpsCheckInSuccessPage() {
       <div className="mb-[81px] mt-24">
         <LinkButton
           href="/gpsLocation"
-          color="bg-successBlue"
+          bgColor="successBlue"
           text="重新打卡"
         />
         <LinkButton
           href="/recordsSearch"
-          color="bg-alertRed"
+          bgColor="alertRed"
           text="打卡紀錄查詢/修改"
           margin="ml-[22px]"
         />

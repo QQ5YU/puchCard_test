@@ -70,7 +70,7 @@ export default function ViewHistoryRecordPage({ params }: any) {
       <LinkButton
         href="/recordsSearch"
         text="確定"
-        color="bg-successBlue"
+        bgColor="successBlue"
         margin="mt-20 mb-5"
       />
     </div>

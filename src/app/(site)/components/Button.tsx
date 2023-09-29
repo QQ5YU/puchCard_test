@@ -1,12 +1,9 @@
 import { FC } from "react";
 
-interface ButtonProps {
-  text: string;
-  type: "submit" | "button";
+interface ButtonProps extends Button {
   color: string;
   disabled?: boolean;
   margin?: string;
-  onClick?: () => void;
 }
 
 const Button: FC<ButtonProps> = ({
