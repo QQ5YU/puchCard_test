@@ -6,8 +6,13 @@ import FileUpload from "./components/FileUpload";
 import { Note } from "./components/Note";
 import Button from "@/app/(site)/components/Button";
 import { useState } from "react";
+import { useAllRecordData } from "@/app/context/RecordDataContext";
 
 export default function ModifyRecordPage({ params }: any) {
+  const { allRecordData } = useAllRecordData();
+  const recordData = allRecordData[params.record];
+  const router = useRouter();
+
   const [note, setNote] = useState<string>("null");
   const [imgPath, setImgPath] = useState<string>("null");
   const [typeNum, setTypeNum] = useState<number | undefined>(undefined);
@@ -15,7 +20,7 @@ export default function ModifyRecordPage({ params }: any) {
   const handleSubmit = () => {
     const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/modifyRecord`;
     const data = {
-      id: params.record,
+      id: recordData.vw_punchId,
       notes: note,
       img: imgPath,
       type: typeNum,
@@ -25,14 +30,12 @@ export default function ModifyRecordPage({ params }: any) {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((jsonRes) => {
-        console.log(jsonRes);
+      .then((data) => {
+        if (data.status === 200) router.push("/recordsSearch/modify/success");
       })
       .catch((err) => {
         console.log(err);
       });
-
-    // router.push("/recordsSearch/modify/success");
   };
 
   const handleNote = (value: string) => {

@@ -3,7 +3,7 @@ import LinkComponent from "./LinkComponent";
 import { useState, useEffect, useRef } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Range } from "react-date-range";
-import { useRecordData } from "@/app/context/RecordDataContext";
+import { useAllRecordData } from "@/app/context/RecordDataContext";
 import handleDateTime from "../actions/handleDateTime";
 
 function renderRecord(record: recordType, index: number) {
@@ -124,7 +124,7 @@ export default function RecordList({
     undefined
   );
   const processedDataRef = useRef<recordType[] | undefined>(undefined);
-  const { recordData, setRecordData } = useRecordData();
+  const { allRecordData, setAllRecordData } = useAllRecordData();
 
   const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/getHistoryRecords`;
   useEffect(() => {
@@ -161,9 +161,9 @@ export default function RecordList({
       setProcessedData(filteredData);
     }
 
-    if (!processedDataRef.current) setRecordData(employeeData);
-    else setRecordData(filteredData);
-  }, [employeeData, searchContent, dateRange, setRecordData]);
+    if (!processedDataRef.current) setAllRecordData(employeeData);
+    else setAllRecordData(filteredData);
+  }, [employeeData, searchContent, dateRange, setAllRecordData]);
 
   return (
     <>

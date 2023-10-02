@@ -2,7 +2,6 @@ import { NextApiResponse, NextApiRequest } from "next";
 import axiosInstance from "@/pages/api/axiosInstance";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
-import qs from "qs";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,16 +9,14 @@ export default async function handler(
 ) {
   try {
     const session = await getServerSession(req, res, authOptions);
-    const data = JSON.parse(JSON.parse(JSON.stringify(req.body)));
-    // console.log(session.user.accessToken);
+    const data = JSON.parse(req.body);
+
     const recordData = {
       id: Number(data.id),
       notes: data.notes,
       img: data.img,
       type: data.type,
     };
-
-    console.log(data);
 
     axiosInstance
       .put("/api/PunchEdit/", recordData, {
@@ -30,9 +27,9 @@ export default async function handler(
         },
       })
       .then((result) => {
-        console.log(result);
         if (result.statusText === "OK")
           return res.status(200).json({
+            status: 200,
             message: result.statusText,
           });
         else return null;

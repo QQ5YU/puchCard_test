@@ -8,15 +8,15 @@ export function RecordDataProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [recordData, setRecordData] = useState([]);
+  const [allRecordData, setAllRecordData] = useState([]);
 
   return (
-    <RecordDataContext.Provider value={{ recordData, setRecordData }}>
+    <RecordDataContext.Provider value={{ allRecordData, setAllRecordData }}>
       {children}
     </RecordDataContext.Provider>
   );
 }
 
-export function useRecordData() {
+export function useAllRecordData() {
   return useContext(RecordDataContext);
 }
