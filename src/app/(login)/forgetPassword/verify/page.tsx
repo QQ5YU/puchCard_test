@@ -79,7 +79,7 @@ export default function VerifyPage() {
               value={verificationCode}
               placeholder="輸入驗證碼"
               onChange={handleFieldChange}
-              src="../images/login/receive.svg"
+              imgSrc="../images/login/receive.svg"
               width={19}
               height={19}
               alt="receive-icon"

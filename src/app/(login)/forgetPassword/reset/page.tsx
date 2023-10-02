@@ -85,7 +85,7 @@ export default function ResetPasswordPage() {
               label="newPassword"
               placeholder="請輸入新密碼"
               onChange={handleFieldChange}
-              src="../images/login/password.svg"
+              imgSrc="../images/login/password.svg"
               width={19}
               height={19}
               alt="password-icon"
@@ -99,7 +99,7 @@ export default function ResetPasswordPage() {
               label="confirmPassword"
               placeholder="請再次確認您的新密碼"
               onChange={handleFieldChange}
-              src="../images/login/password.svg"
+              imgSrc="../images/login/password.svg"
               width={19}
               height={19}
               alt="password-icon"

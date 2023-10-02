@@ -95,7 +95,7 @@ export default function ForgetPasswordPage() {
               value={authState.employeeId}
               placeholder="員工編號"
               onChange={handleFieldChange}
-              src="images/login/user.svg"
+              imgSrc="images/login/user.svg"
               width={19}
               height={19}
               alt="uer-icon"
@@ -110,7 +110,7 @@ export default function ForgetPasswordPage() {
               label="email"
               placeholder="電子信箱"
               onChange={handleFieldChange}
-              src="images/login/email.svg"
+              imgSrc="images/login/email.svg"
               width={19}
               height={19}
               alt="email-icon"
