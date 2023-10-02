@@ -49,12 +49,12 @@ const Content: FC<ContentProps> = ({
           type="button"
           onClick={onClick}
           text={buttonText}
-          color="bg-successBlue"
+          bgColor="successBlue"
         />
         <LinkButton
           href={href}
           text={LinkText}
-          color="bg-alertRed"
+          bgColor="alertRed"
           margin="ml-6"
         />
       </div>

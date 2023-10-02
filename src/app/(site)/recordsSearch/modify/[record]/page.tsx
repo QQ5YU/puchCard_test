@@ -76,7 +76,7 @@ export default function ModifyRecordPage({ params }: any) {
         <div className="mb-[19px] mt-[31px] flex justify-center">
           <Button
             type="submit"
-            color="bg-alertRed"
+            bgColor="alertRed"
             text="確認送出"
             onClick={handleSubmit}
           />
