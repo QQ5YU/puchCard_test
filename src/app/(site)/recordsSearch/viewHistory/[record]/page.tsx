@@ -3,7 +3,7 @@ import Title from "@/app/(site)/components/Title";
 import LinkButton from "@/app/(site)/components/LinkButton";
 import Span from "./components/Span";
 import type { Metadata } from "next";
-import { useRecordData } from "@/app/context/RecordDataContext";
+import { useAllRecordData } from "@/app/context/RecordDataContext";
 import handleDateTime from "../../actions/handleDateTime";
 
 export const metadata: Metadata = {
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ViewHistoryRecordPage({ params }: any) {
-  const { recordData } = useRecordData();
-  console.log(recordData);
-  const dateTime = handleDateTime(recordData[params.record].vw_datetime);
+  const { allRecordData } = useAllRecordData();
+  console.log(allRecordData);
+  const dateTime = handleDateTime(allRecordData[params.record].vw_datetime);
 
   return (
     <div className="mx-auto flex min-h-screen w-[38.08%] min-w-[390px] max-w-[390px] flex-col items-center">
@@ -23,12 +23,12 @@ export default function ViewHistoryRecordPage({ params }: any) {
           width="w-1/2"
           margin="mb-2"
           label="員工編號"
-          data={recordData[params.record].vw_employee}
+          data={allRecordData[params.record].vw_employee}
         />
         <Span
           width="w-full"
           label="部門"
-          data={recordData[params.record].vw_employee}
+          data={allRecordData[params.record].vw_employee}
         />
       </div>
       <div className="mt-[21px] min-h-[109px] w-[38.28%] min-w-[392px] max-w-[420px] rounded-[20px] bg-[#DCE6F1] px-[30px] py-7">
@@ -42,29 +42,33 @@ export default function ViewHistoryRecordPage({ params }: any) {
           width="w-full"
           margin="mb-5"
           label="地點"
-          data={recordData[params.record].vw_addr}
+          data={allRecordData[params.record].vw_addr}
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="打卡類型"
-          data={recordData[params.record].vw_type}
+          data={allRecordData[params.record].vw_type}
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="照片"
           data={
-            recordData[params.record].vw_img === null
+            allRecordData[params.record].vw_img === null
               ? "無照片"
-              : recordData[params.record].vw_img
+              : allRecordData[params.record].vw_img
           }
         />
         <Span
           width="w-full"
           margin="mb-5"
           label="備註"
-          data={recordData[params.record].vw_notes}
+          data={
+            allRecordData[params.record].vw_notes === null
+              ? "無備註"
+              : allRecordData[params.record].vw_notes
+          }
         />
       </div>
       <LinkButton

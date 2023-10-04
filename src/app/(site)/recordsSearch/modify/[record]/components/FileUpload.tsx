@@ -7,23 +7,46 @@ export default function FileUpload({
 }: {
   onUpload: (value: string) => void;
 }) {
+  // const [fileUrl, setFileUrl] = useState("");
   const [fileName, setFileName] = useState("");
   const [image, setImage] = useState<string | undefined>(undefined);
   const [validFileType, setValidFileType] = useState(true);
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const upLoadFile = e.target.files?.[0];
     if (upLoadFile) {
-      console.log(e);
       if (upLoadFile.type.startsWith("image/")) {
-        onUpload(`/images/records/${upLoadFile.name}`);
-        setFileName(upLoadFile.name);
         setImage(URL.createObjectURL(upLoadFile));
+        setFileName(upLoadFile.name);
+        const formData = new FormData();
+        formData.append("file", upLoadFile);
+        formData.append("upload_preset", "msdc_checkIn_img");
+
+        fetchToCloudinary(formData);
       } else {
         setValidFileType(false);
         e.target.value = "";
       }
     }
+  };
+
+  const fetchToCloudinary = (formData: FormData) => {
+    const url =
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload` ||
+      "";
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        onUpload(data.secure_url);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <label className="border-mainBlue mb-[18px] mt-7 flex h-[207px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed">

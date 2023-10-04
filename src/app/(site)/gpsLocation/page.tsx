@@ -133,7 +133,7 @@ export default function UserLocationPage() {
           {isCheckInLoading === true ? (
             <Button
               type="submit"
-              color="bg-alertRed"
+              bgColor="alertRed"
               text="確認送出"
               disabled={address === undefined ? true : false}
               margin="ml-[26px]"
@@ -148,7 +148,7 @@ export default function UserLocationPage() {
               />
               <Button
                 type="submit"
-                color="bg-alertRed"
+                bgColor="alertRed"
                 text="開始打卡"
                 margin="ml-[26px]"
                 onClick={handleGpsLocation}

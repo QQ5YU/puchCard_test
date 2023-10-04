@@ -2,7 +2,6 @@ import { FC } from "react";
 import Link from "next/link";
 
 
-
 const LinkButton: FC<LinkButton> = ({ href, text, bgColor, margin }) => {
   return (
     <Link
