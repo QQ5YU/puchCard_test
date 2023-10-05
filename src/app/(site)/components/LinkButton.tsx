@@ -5,7 +5,7 @@ const LinkButton: FC<LinkButton> = ({ href, text, bgColor, margin }) => {
   return (
     <Link
       href={href}
-      className={`bg-${bgColor} ${margin}
+      className={`${bgColor} ${margin}
        rounded-lg text-white font-bold text-[18px] 
        py-5 px-1 min-w-[163px] sm:w-[17.77%] sm:max-w-[182px]
        inline-block text-center

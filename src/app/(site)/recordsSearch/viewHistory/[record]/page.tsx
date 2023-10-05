@@ -5,7 +5,6 @@ import Span from "./components/Span";
 import handleDateTime from "../../actions/handleDateTime";
 import { useEffect, useState } from "react";
 
-
 export default function ViewHistoryRecordPage({ params }: any) {
   const [recordData, setRecordData] = useState<undefined | recordType>(
     undefined
@@ -90,7 +89,7 @@ export default function ViewHistoryRecordPage({ params }: any) {
       <LinkButton
         href="/recordsSearch"
         text="確定"
-        bgColor="successBlue"
+        bgColor="bg-successBlue"
         margin="mt-20 mb-5"
       />
     </div>

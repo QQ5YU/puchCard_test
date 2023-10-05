@@ -22,10 +22,14 @@ export default function GpsCheckInFailedPage() {
         以便完成準確的打卡記錄，感謝您的合作！
       </p>
       <div className="mt-[18px] mb-[81px]">
-        <LinkButton href="/gpsLocation" bgColor="successBlue" text="重新打卡" />
+        <LinkButton
+          href="/gpsLocation"
+          bgColor="bg-uccessBlue"
+          text="重新打卡"
+        />
         <LinkButton
           href="/recordsSearch"
-          bgColor="alertRed"
+          bgColor="bg-alertRed"
           text="打卡紀錄查詢/修改"
           margin="ml-[22px]"
         />

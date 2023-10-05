@@ -24,14 +24,10 @@ export default function GpsCheckInSuccessPage() {
         text2="，系統將自動將您導向回打卡頁面，請重新進行打卡。"
       />
       <div className="mb-[81px] mt-24">
-        <LinkButton
-          href="/gpsLocation"
-          bgColor="successBlue"
-          text="重新打卡"
-        />
+        <LinkButton href="/gpsLocation" bgColor="successBlue" text="重新打卡" />
         <LinkButton
           href="/recordsSearch"
-          bgColor="alertRed"
+          bgColor="bg-alertRed"
           text="打卡紀錄查詢/修改"
           margin="ml-[22px]"
         />

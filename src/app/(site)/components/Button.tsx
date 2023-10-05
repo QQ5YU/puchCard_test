@@ -18,7 +18,7 @@ const Button: FC<ButtonProps> = ({
     <button
       type={type}
       disabled={disabled}
-      className={`bg-${bgColor} ${margin} rounded-[10px] 
+      className={`${bgColor} ${margin} rounded-[10px] 
       ${disabled === true && "brightness-75"}
      text-white text-center text-[18px] font-bold inline-block
        py-5 px-2 min-w-[163px] sm:w-[17.77%] sm:max-w-[182px]

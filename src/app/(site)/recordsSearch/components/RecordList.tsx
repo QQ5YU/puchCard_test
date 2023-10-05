@@ -24,12 +24,12 @@ function renderRecord(record: recordType, index: number) {
       <div className="flex flex-col justify-around">
         <LinkComponent
           href={`/recordsSearch/modify/${record.vw_punchId}`}
-          bgColor="alertRed"
+          bgColor="bg-alertRed"
           text="修改"
         />
         <LinkComponent
           href={`/recordsSearch/viewHistory/${record.vw_punchId}`}
-          bgColor="successBlue"
+          bgColor="bg-successBlue"
           text="查看"
           margin="mt-2"
         />

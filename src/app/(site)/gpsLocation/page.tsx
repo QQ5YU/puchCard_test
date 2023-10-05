@@ -143,12 +143,12 @@ export default function UserLocationPage() {
             <>
               <LinkButton
                 href="/recordsSearch"
-                bgColor="successBlue"
+                bgColor="bg-successBlue"
                 text="打卡紀錄查詢/修改"
               />
               <Button
                 type="submit"
-                bgColor="alertRed"
+                bgColor="bg-alertRed"
                 text="開始打卡"
                 margin="ml-[26px]"
                 onClick={handleGpsLocation}
