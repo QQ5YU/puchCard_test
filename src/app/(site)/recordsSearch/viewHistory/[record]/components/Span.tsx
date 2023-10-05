@@ -11,8 +11,8 @@ interface SpanProps {
 const Span: FC<SpanProps> = ({ width, label, data, margin }) => {
   return (
     <span className={`${width} inline-block font-bold ${margin}`}>
-      {label}:
-      {label === "照片" ? (
+      {label}：
+      {label === "照片" && data !== "null" && data !== "無照片" ? (
         <Image
           src={data}
           width={320}

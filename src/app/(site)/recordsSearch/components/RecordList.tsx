@@ -14,8 +14,8 @@ function renderRecord(record: recordType, index: number) {
     >
       <div className="w-min-[252px] w-max-[260px] mr-7 w-[64.62%]">
         <div className="w-full rounded-t-md bg-[#74ADF080] px-[19px] py-2">
-          <span className="mr-7">{dateTime.date}</span>
-          <span>{dateTime.time}</span>
+          <span className="mr-7">{dateTime && dateTime.date}</span>
+          <span>{dateTime && dateTime.time}</span>
         </div>
         <div className="w-full rounded-b-md bg-[#6091CA20] px-[19px] py-2">
           <span>{record.vw_addr}</span>
@@ -23,12 +23,12 @@ function renderRecord(record: recordType, index: number) {
       </div>
       <div className="flex flex-col justify-around">
         <LinkComponent
-          href={`/recordsSearch/modify/${index}`}
+          href={`/recordsSearch/modify/${record.vw_punchId}`}
           bgColor="alertRed"
           text="修改"
         />
         <LinkComponent
-          href={`/recordsSearch/viewHistory/${index}`}
+          href={`/recordsSearch/viewHistory/${record.vw_punchId}`}
           bgColor="successBlue"
           text="查看"
           margin="mt-2"

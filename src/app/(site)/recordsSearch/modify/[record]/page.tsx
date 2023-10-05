@@ -5,37 +5,54 @@ import Title from "@/app/(site)/components/Title";
 import FileUpload from "./components/FileUpload";
 import { Note } from "./components/Note";
 import Button from "@/app/(site)/components/Button";
-import { useState } from "react";
-import { useAllRecordData } from "@/app/context/RecordDataContext";
+import { useEffect, useState } from "react";
 
 export default function ModifyRecordPage({ params }: any) {
-  const { allRecordData } = useAllRecordData();
-  const recordData = allRecordData[params.record];
   const router = useRouter();
 
+  const [recordData, setRecordData] = useState<undefined | recordType>(
+    undefined
+  );
   const [note, setNote] = useState<string>("null");
   const [imgPath, setImgPath] = useState<string>("null");
   const [typeNum, setTypeNum] = useState<number | undefined>(undefined);
 
-  const handleSubmit = () => {
-    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/modifyRecord`;
-    const data = {
-      id: recordData.vw_punchId,
-      notes: note,
-      img: imgPath,
-      type: typeNum,
-    };
+  const getData = useEffect(() => {
+    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/viewHistoryRecord`;
     fetch(url, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: params.record,
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.status === 200) router.push("/recordsSearch/modify/success");
+        setRecordData(data.recordData);
       })
       .catch((err) => {
         console.log(err);
       });
+  }, []);
+
+  const handleSubmit = () => {
+    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/modifyRecord`;
+    if (recordData) {
+      const data = {
+        id: recordData.vw_punchId,
+        notes: note,
+        img: imgPath,
+        type: typeNum,
+      };
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) router.push("/recordsSearch/modify/success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else console.log("record data is undefined");
   };
 
   const handleNote = (value: string) => {

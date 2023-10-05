@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Line@ 打卡系統 打卡記錄修改/查詢",
+  title: "Line@ 打卡系統 打卡記錄查詢",
 };
 
 export default function RootLayout({
