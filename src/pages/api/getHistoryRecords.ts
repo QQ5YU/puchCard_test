@@ -13,9 +13,12 @@ export default async function handler(
     const token = session.user.accessToken;
     // console.log(" --------------- token ----------------", token);
     axiosInstance
-      .get("/api/PunchRecordSearch/AdminGetAllPunch", {
+      .get("/api/PunchRecordSearch/UserGetAllPunchRecord", {
         headers: {
           Authorization: token,
+        },
+        params: {
+          strSearch: "",
         },
       })
       .then((result) => {

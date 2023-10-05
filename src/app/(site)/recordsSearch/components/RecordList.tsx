@@ -3,7 +3,6 @@ import LinkComponent from "./LinkComponent";
 import { useState, useEffect, useRef } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Range } from "react-date-range";
-import { useAllRecordData } from "@/app/context/RecordDataContext";
 import handleDateTime from "../actions/handleDateTime";
 
 function renderRecord(record: recordType, index: number) {
@@ -37,17 +36,6 @@ function renderRecord(record: recordType, index: number) {
       </div>
     </div>
   );
-}
-
-function handleEmployeeIdFilter(rawData: recordType[], employId: string) {
-  try {
-    return rawData.filter(
-      (record: recordType) => record.vw_employee === employId
-    );
-  } catch (err) {
-    console.log("----- handleRawDataError -----", err);
-    return [];
-  }
 }
 
 function handleDataRangeFilter(
@@ -118,13 +106,11 @@ export default function RecordList({
   dateRange: Range[] | undefined;
 }) {
   const { data: session } = useSession();
-  const [data, setData] = useState([]);
   const [employeeData, setEmployeeData] = useState<recordType[]>([]);
   const [processedData, setProcessedData] = useState<recordType[] | undefined>(
     undefined
   );
   const processedDataRef = useRef<recordType[] | undefined>(undefined);
-  const { allRecordData, setAllRecordData } = useAllRecordData();
 
   const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/getHistoryRecords`;
   useEffect(() => {
@@ -134,19 +120,12 @@ export default function RecordList({
         if (data.status === 401) {
           alert(data.message);
           signOut();
-        } else setData(data.data);
+        } else setEmployeeData(data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  useEffect(() => {
-    if (session?.user.employeeId) {
-      const employData = handleEmployeeIdFilter(data, session.user.employeeId);
-      if (employData) setEmployeeData(employData);
-    }
-  }, [data, session]);
 
   useEffect(() => {
     let rawData: recordType[] = processedDataRef.current || [...employeeData];
@@ -160,10 +139,7 @@ export default function RecordList({
       processedDataRef.current = filteredData;
       setProcessedData(filteredData);
     }
-
-    if (!processedDataRef.current) setAllRecordData(employeeData);
-    else setAllRecordData(filteredData);
-  }, [employeeData, searchContent, dateRange, setAllRecordData]);
+  }, [employeeData, searchContent, dateRange]);
 
   return (
     <>
