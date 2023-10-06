@@ -27,6 +27,11 @@ export default function DateRangePicker({
 
   const handleSelect = (ranges: RangeKeyDict) => {
     const { selection } = ranges;
+    if (selection) {
+      const endDate = selection.endDate;
+      endDate?.setHours(23, 59, 59);
+      selection.endDate = endDate;
+    }
     setDateRange([selection]);
   };
 

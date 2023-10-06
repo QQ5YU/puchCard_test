@@ -24,7 +24,7 @@ export default function GpsCheckInFailedPage() {
       <div className="mt-[18px] mb-[81px]">
         <LinkButton
           href="/gpsLocation"
-          bgColor="bg-uccessBlue"
+          bgColor="bg-successBlue"
           text="重新打卡"
         />
         <LinkButton

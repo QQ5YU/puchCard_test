@@ -3,10 +3,11 @@ import LinkComponent from "./LinkComponent";
 import { useState, useEffect, useRef } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Range } from "react-date-range";
-import handleDateTime from "../actions/handleDateTime";
+import { handleDateTime, isTimeOut } from "../actions/handleDateTime";
 
 function renderRecord(record: recordType, index: number) {
   const dateTime = handleDateTime(record.vw_datetime);
+  const isExpire = isTimeOut(record.vw_datetime);
   return (
     <div
       className="shadow-record mt-[26px] flex w-full rounded-lg bg-[#FBFBFB] py-3 pl-[10px] pr-[21p]"
@@ -22,11 +23,14 @@ function renderRecord(record: recordType, index: number) {
         </div>
       </div>
       <div className="flex flex-col justify-around">
-        <LinkComponent
-          href={`/recordsSearch/modify/${record.vw_punchId}`}
-          bgColor="bg-alertRed"
-          text="修改"
-        />
+        {isExpire === false && (
+          <LinkComponent
+            href={`/recordsSearch/modify/${record.vw_punchId}`}
+            bgColor="bg-alertRed"
+            text="修改"
+          />
+        )}
+
         <LinkComponent
           href={`/recordsSearch/viewHistory/${record.vw_punchId}`}
           bgColor="bg-successBlue"

@@ -2,7 +2,7 @@
 import Title from "@/app/(site)/components/Title";
 import LinkButton from "@/app/(site)/components/LinkButton";
 import Span from "./components/Span";
-import handleDateTime from "../../actions/handleDateTime";
+import { handleDateTime } from "../../actions/handleDateTime";
 import { useEffect, useState } from "react";
 
 export default function ViewHistoryRecordPage({ params }: any) {
