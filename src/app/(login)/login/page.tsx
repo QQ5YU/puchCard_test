@@ -66,6 +66,13 @@ export default function LogInPage() {
     setIsLoading(false);
     setIsAlert(false);
   };
+  // cicoeee91@gmail.com
+  const handleLogInWithLine = async () => {
+    const res = await signIn("line", {
+      redirect: false,
+    });
+    console.log(res);
+  };
 
   return (
     <>
@@ -131,6 +138,14 @@ export default function LogInPage() {
             </div>
             <Button text="登入" type="submit" isLoading={isLoading} />
           </form>
+          {/* <hr className="h-[3px] bg-gray-100 my-4" /> */}
+          <button
+            type="button"
+            className="bg-green-500 text-white px-5 py-3 mt-2 rounded-[10px] font-bold"
+            onClick={handleLogInWithLine}
+          >
+            使用 LINE 登入
+          </button>
 
           <Link
             href="/forgetPassword"

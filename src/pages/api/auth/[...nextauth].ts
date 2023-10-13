@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
+import LineProvider from "next-auth/providers/line";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
 import axiosInstance from "../axiosInstance";
 interface AuthData {
   employeeId: string;
@@ -9,6 +9,10 @@ interface AuthData {
 
 export const authOptions = {
   providers: [
+    LineProvider({
+      clientId: process.env.LINE_CLIENT_ID || "",
+      clientSecret: process.env.LINE_CLIENT_SECRET || "",
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {},
