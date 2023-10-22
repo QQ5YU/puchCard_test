@@ -116,7 +116,13 @@ export default function ForgetPasswordPage() {
               alt="email-icon"
             />
           </div>
-          <Button text="寄送驗證碼" type="submit" isLoading={isLoading} />
+          <Button
+            bgColor="successBlue"
+            margin="mt-[71px]"
+            text="寄送驗證碼"
+            type="submit"
+            isLoading={isLoading}
+          />
         </form>
       </div>
     </>

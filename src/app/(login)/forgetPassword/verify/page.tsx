@@ -85,7 +85,13 @@ export default function VerifyPage() {
               alt="receive-icon"
             />
           </div>
-          <Button text="驗證" type="submit" isLoading={isLoading} />
+          <Button
+            bgColor="successBlue"
+            margin="mt-[71px]"
+            text="驗證"
+            type="submit"
+            isLoading={isLoading}
+          />
         </form>
       </div>
     </>

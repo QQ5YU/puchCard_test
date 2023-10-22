@@ -1,9 +1,7 @@
 import { FC } from "react";
 
 interface ButtonProps extends Button {
-  bgColor: string;
   disabled?: boolean;
-  margin?: string;
 }
 
 const Button: FC<ButtonProps> = ({

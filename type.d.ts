@@ -3,9 +3,11 @@ interface Title {
 }
 
 interface Button {
+  bgColor: string;
   text: string;
   type: "submit" | "button";
   isLoading?: boolean;
+  margin?: string;
   onClick?: () => void;
 }
 

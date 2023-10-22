@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import LineProvider from "next-auth/providers/line";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axiosInstance from "../axiosInstance";
+
 interface AuthData {
   employeeId: string;
   password: string;
@@ -47,14 +48,26 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: any) {
-      // console.log("--------- token ----------", { ...token });
+    async jwt({ token, user, trigger, session }: any) {
+      if (trigger === "update" && session?.user.accessToken) {
+        token.accessToken = session.user.accessToken;
+      }
+      // console.log("--------- {token} ----------", { ...token });
       // console.log("--------- user -------: ", { ...user });
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
-      session.user.employeeId = token.user.employeeId;
-      session.user.accessToken = token.user.accessToken;
+      console.log("--------- session token ----------", token);
+
+      if (session.user.employeeId) {
+        session.user.employeeId = token.user.employeeId;
+        session.user.accessToken = token.user.accessToken;
+      }
+
+      if (token.id) {
+        session.user.userId = token.id;
+        session.user.accessToken = token.accessToken;
+      }
       // console.log("--------- session ----------", session);
       return session;
     },

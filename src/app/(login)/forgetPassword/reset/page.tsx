@@ -105,7 +105,12 @@ export default function ResetPasswordPage() {
               alt="password-icon"
             />
           </div>
-          <Button text="送出" type="submit" />
+          <Button
+            bgColor="successBlue"
+            margin="mt-[71px]"
+            text="送出"
+            type="submit"
+          />
         </form>
       </div>
     </>
