@@ -136,7 +136,9 @@ export default function LogInPage() {
               />
             </div>
             <Button
-              bgColor="successBlue"
+              bgColor="bg-successBlue"
+              hoverTextColor="hover:text-successBlue"
+              hoverBorderColor="hover:border-successBlue"
               margin="mt-14"
               text="登入"
               type="submit"
@@ -144,7 +146,9 @@ export default function LogInPage() {
             />
           </form>
           <Button
-            bgColor="green-500"
+            bgColor="bg-green-500"
+            hoverBorderColor="hover:border-green-500"
+            hoverTextColor="hover:text-green-500"
             margin="mt-2"
             text=" 使用 LINE 登入"
             type="button"

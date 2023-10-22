@@ -86,7 +86,9 @@ export default function VerifyPage() {
             />
           </div>
           <Button
-            bgColor="successBlue"
+            bgColor="bg-successBlue"
+            hoverTextColor="hover:text-successBlue"
+            hoverBorderColor="hover:border-successBlue"
             margin="mt-[71px]"
             text="驗證"
             type="submit"

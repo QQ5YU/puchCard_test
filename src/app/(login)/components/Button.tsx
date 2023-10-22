@@ -1,19 +1,28 @@
 import { FC } from "react";
 import { LuLoader2 } from "react-icons/lu";
 
-const Button: FC<Button> = ({
+interface ButtonProps extends Button {
+  hoverTextColor: string;
+  hoverBorderColor: string;
+}
+
+const Button: FC<ButtonProps> = ({
   bgColor,
   margin,
   text,
+  hoverTextColor,
+  hoverBorderColor,
   type,
   onClick,
   isLoading,
 }) => {
   return (
     <button
-      className={`bg-${bgColor} ${
+      className={`${bgColor} ${
         margin && margin
-      } h-12 w-full rounded-[10px] border-2 border-transparent text-center font-bold text-white transition duration-[.3s] hover:bg-white ease hover:text-${bgColor} hover:border-${bgColor}`}
+      } h-12 w-full rounded-[10px] border-2 border-transparent 
+      text-center font-bold text-white transition duration-[.3s]
+       hover:bg-white ease ${hoverTextColor} ${hoverBorderColor}`}
       type={type}
       onClick={onClick}
     >

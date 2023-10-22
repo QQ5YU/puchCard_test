@@ -117,7 +117,9 @@ export default function ForgetPasswordPage() {
             />
           </div>
           <Button
-            bgColor="successBlue"
+            bgColor="bg-successBlue"
+            hoverTextColor="hover:text-successBlue"
+            hoverBorderColor="hover:border-successBlue"
             margin="mt-[71px]"
             text="寄送驗證碼"
             type="submit"
