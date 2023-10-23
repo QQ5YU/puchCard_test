@@ -14,8 +14,9 @@ import { getSession } from "next-auth/react";
 
 export default function LogInPage() {
   const router = useRouter();
-  const { status } = useSession();
+  const { status, update } = useSession();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLineLogInLoading, setIsLineLogInLoading] = useState(false);
   const [authState, setAuthState] = useState({
     employeeId: "",
     password: "",
@@ -68,6 +69,13 @@ export default function LogInPage() {
   };
 
   const handleLogInWithLine = async () => {
+    setIsLineLogInLoading(true);
+    if (window !== undefined) {
+      const currentDate = new Date();
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      const expires = currentDate.toUTCString();
+      document.cookie = "LogIn=UseLineLogIn; expires=" + expires;
+    }
     signIn("line", {
       redirect: false,
     });
@@ -152,7 +160,7 @@ export default function LogInPage() {
             margin="mt-2"
             text=" 使用 LINE 登入"
             type="button"
-            isLoading={isLoading}
+            isLoading={isLineLogInLoading}
             onClick={handleLogInWithLine}
           />
           <Link

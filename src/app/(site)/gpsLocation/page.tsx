@@ -69,30 +69,35 @@ export default function UserLocationPage() {
         alert("發生錯誤，請重新嘗試....");
       });
   };
-  // cicoeee91@gmail.com
+  
   useEffect(() => {
-    const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/lineUIDbind`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        const employeeData = {
-          employeeId: data.data.employeeId,
-          password: data.data.password,
-        };
-        const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/getAccessToken`;
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(employeeData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            update({
-              user: {
-                accessToken: data.data.access_token,
-              },
-            });
-          });
-      });
+    if (document.cookie === "LogIn=UseLineLogIn") {
+      // cicoeee91@gmail.com
+      const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/lineUIDbind`;
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            const employeeData = {
+              employeeId: data.data.employeeId,
+              password: data.data.password,
+            };
+            const url = `${process.env.NEXT_PUBLIC_HOST_URL}/api/getAccessToken`;
+            fetch(url, {
+              method: "POST",
+              body: JSON.stringify(employeeData),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                update({
+                  user: {
+                    accessToken: data.data.access_token,
+                  },
+                });
+              });
+          }
+        });
+    }
   }, []);
 
   return (

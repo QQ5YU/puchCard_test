@@ -57,11 +57,13 @@ export const authOptions = {
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
-      console.log("--------- session token ----------", token);
+      // console.log("--------- session token ----------", token);
 
-      if (session.user.employeeId) {
-        session.user.employeeId = token.user.employeeId;
-        session.user.accessToken = token.user.accessToken;
+      if (session.user.name === undefined) {
+        if (token.user.employeeId) {
+          session.user.employeeId = token.user.employeeId;
+          session.user.accessToken = token.user.accessToken;
+        }
       }
 
       if (token.id) {
