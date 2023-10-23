@@ -69,7 +69,7 @@ export default function UserLocationPage() {
         alert("發生錯誤，請重新嘗試....");
       });
   };
-  
+
   useEffect(() => {
     if (document.cookie === "LogIn=UseLineLogIn") {
       // cicoeee91@gmail.com
@@ -77,7 +77,7 @@ export default function UserLocationPage() {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          if (data) {
+          if (data.data && data.data !== null) {
             const employeeData = {
               employeeId: data.data.employeeId,
               password: data.data.password,
