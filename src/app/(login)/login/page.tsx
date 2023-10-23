@@ -75,10 +75,10 @@ export default function LogInPage() {
       currentDate.setMonth(currentDate.getMonth() + 1);
       const expires = currentDate.toUTCString();
       document.cookie = "LogIn=UseLineLogIn; expires=" + expires;
+      signIn("line", {
+        callbackUrl: `${process.env.NEXT_PUBLIC_HOST_URL}/gpsLocation`,
+      });
     }
-    signIn("line", {
-      redirect: false,
-    }).then(() => router.push("/gpsLocation"));
   };
 
   return (

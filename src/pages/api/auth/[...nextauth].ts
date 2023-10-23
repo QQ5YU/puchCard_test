@@ -48,17 +48,18 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-
     async jwt({ token, user, trigger, session }: any) {
+      console.log(session);
       if (trigger === "update" && session?.user.accessToken) {
         token.accessToken = session.user.accessToken;
       }
+
       // console.log("--------- {token} ----------", { ...token });
-      // console.log("--------- user -------: ", { ...user });
+      // console.log("--------- {user} -------: ", { ...user });
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
-      console.log("--------- session token ----------", token);
+      // console.log("--------- session token ----------", token);
 
       if (session.user.name === undefined) {
         if (token.user.employeeId) {
@@ -76,7 +77,7 @@ export const authOptions = {
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
+  // debug: process.env.NODE_ENV === "development",
   pages: { signIn: "/login" },
 };
 

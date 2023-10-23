@@ -9,6 +9,7 @@ export default async function handler(
 ) {
   try {
     const session = await getServerSession(req, res, authOptions);
+
     const userData = {
       line_name: session.user.name,
       line_uid: session.user.userId,
@@ -32,7 +33,9 @@ export default async function handler(
         .status(500)
         .json({ message: "LINE UID BIND AXIOS ERROR", error: err });
     }
-  } catch (err) {
-    return res.status(500).json({ message: "LINE UID BIND ERROR", error: err });
+  } catch (err: any) {
+    return res
+      .status(500)
+      .json({ message: "LINE UID BIND ERROR", error: err.message });
   }
 }
