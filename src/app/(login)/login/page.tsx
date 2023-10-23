@@ -77,7 +77,7 @@ export default function LogInPage() {
       document.cookie = "LogIn=UseLineLogIn; expires=" + expires;
     }
     signIn("line", {
-      redirect: false,
+      redirect: true,
     });
   };
 

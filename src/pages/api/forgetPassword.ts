@@ -13,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         return res.status(404).json({ message: " missing info" });
 
       console.log(process.env.NEXT_PUBLIC_HOST_URL);
-      axiosInstance
+     axiosInstance 
         .get("/api/ForgetPassword/Send", {
           headers: {
             "Content-Type": "application/json",

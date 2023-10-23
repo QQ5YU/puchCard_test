@@ -48,6 +48,9 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    async redirect({ baseUrl }: any) {
+      return baseUrl + "/gpsLocation";
+    },
     async jwt({ token, user, trigger, session }: any) {
       if (trigger === "update" && session?.user.accessToken) {
         token.accessToken = session.user.accessToken;
