@@ -48,9 +48,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ baseUrl }: any) {
-      return baseUrl + "/gpsLocation";
-    },
+
     async jwt({ token, user, trigger, session }: any) {
       if (trigger === "update" && session?.user.accessToken) {
         token.accessToken = session.user.accessToken;
@@ -60,7 +58,7 @@ export const authOptions = {
       return { ...token, ...user };
     },
     async session({ session, token }: any) {
-      // console.log("--------- session token ----------", token);
+      console.log("--------- session token ----------", token);
 
       if (session.user.name === undefined) {
         if (token.user.employeeId) {

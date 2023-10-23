@@ -77,7 +77,7 @@ export default function UserLocationPage() {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          if (data.data && data.data !== null) {
+          if (data) {
             const employeeData = {
               employeeId: data.data.employeeId,
               password: data.data.password,

@@ -77,8 +77,8 @@ export default function LogInPage() {
       document.cookie = "LogIn=UseLineLogIn; expires=" + expires;
     }
     signIn("line", {
-      redirect: true,
-    });
+      redirect: false,
+    }).then(() => router.push("/gpsLocation"));
   };
 
   return (
